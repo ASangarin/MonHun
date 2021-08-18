@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "type=white,facing=north": { "model": "monhun:block/ore_white" },
+    "type=red,facing=north": { "model": "monhun:block/ore_red" },
+    "type=blue,facing=north": { "model": "monhun:block/ore_blue" },
+    "type=gold,facing=north": { "model": "monhun:block/ore_gold" },
+    "type=black,facing=north": { "model": "monhun:block/ore_black" },
+    "type=white,facing=east": { "model": "monhun:block/ore_white", "y": 90 },
+    "type=red,facing=east": { "model": "monhun:block/ore_red", "y": 90 },
+    "type=blue,facing=east": { "model": "monhun:block/ore_blue", "y": 90 },
+    "type=gold,facing=east": { "model": "monhun:block/ore_gold", "y": 90 },
+    "type=black,facing=east": { "model": "monhun:block/ore_black", "y": 90 },
+    "type=white,facing=south": { "model": "monhun:block/ore_white", "y": 180 },
+    "type=red,facing=south": { "model": "monhun:block/ore_red", "y": 180 },
+    "type=blue,facing=south": { "model": "monhun:block/ore_blue", "y": 180 },
+    "type=gold,facing=south": { "model": "monhun:block/ore_gold", "y": 180 },
+    "type=black,facing=south": { "model": "monhun:block/ore_black", "y": 180 },
+    "type=white,facing=west": { "model": "monhun:block/ore_white", "y": 270 },
+    "type=red,facing=west": { "model": "monhun:block/ore_red", "y": 270 },
+    "type=blue,facing=west": { "model": "monhun:block/ore_blue", "y": 270 },
+    "type=gold,facing=west": { "model": "monhun:block/ore_gold", "y": 270 },
+    "type=black,facing=west": { "model": "monhun:block/ore_black", "y": 270 }
+  }
+}

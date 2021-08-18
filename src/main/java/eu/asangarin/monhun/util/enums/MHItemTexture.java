@@ -1,0 +1,24 @@
+package eu.asangarin.monhun.util.enums;
+
+public enum MHItemTexture {
+	AMMO, BAIT, BALL, BARREL, BBQ, BINOCULARS, BLUNT_KINSECT, BOMB, BONE, BOOK, BOOMERANG, BOW, BUG, CARAPACE, CHARGE_BLADE, CHARM, CLAW, COATING,
+	COIN, CRYSTAL, CUTTING_KINSECT, DUAL_BLADES, DUNG, EGG, FISH, GAUNTLETS, GREAT_SWORD, GUNLANCE, HAMMER, HEAVY_BOWGUN, HELM, HERB, HIDE, HORN,
+	HUNTING_HORN, HUSK, INSECT_GLAIVE, JEWEL, KNIFE, LANCE, LEGGINGS, LIGHT_BOWGUN, LONG_SWORD, MANTLE, MAP, MEAT, MONSTERPART, MUSHROOM, NECTAR,
+	NET, OIL, ORE, PALICO, PALICO_BLUNT, PALICO_CUTTING, PALICO_HELM, PALICO_PLATE, PICKAXE, PLATE, POTION, QUESTION, SAC, SCALE, SCRAP, SEED,
+	SHELL, SMOKE, SPHERE, SPROUT, SWITCH_AXE, SWORD_AND_SHIELD, TALISMAN, TICKET, TRAP, TRAPTOOL, UNIDENTIFIED, VIAL, VOUCHER, WAIST, WEB, WEBBING,
+	WHETSTONE, WOOD, THROWN, PILL, MONSTERPLATE;
+
+	public String toIdentifier() {
+		return name().toLowerCase();
+	}
+
+	public float getValue() {
+		return ((float) ordinal()) / values().length;
+	}
+
+	public static MHItemTexture getFromString(String value) {
+		for (MHItemTexture texture : MHItemTexture.values())
+			if (texture.name().equalsIgnoreCase(value)) return texture;
+		return MHItemTexture.QUESTION;
+	}
+}

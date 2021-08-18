@@ -1,0 +1,322 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "monhun:insect_husk",
+          "weight": 4
+        },
+        {
+          "type": "item",
+          "name": "monhun:carpenterbug",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "white"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:carpenterbug",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "blue"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:carpenterbug",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:flashbug",
+          "weight": 6,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "red"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:flashbug",
+          "weight": 6,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "gold"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:flashbug",
+          "weight": 6,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:stinkhopper",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "red"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:stinkhopper",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:shiny_beetle",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "white"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:shiny_beetle",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:bitterbug",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "blue"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:bitterbug",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:thunderbug",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "gold"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:thunderbug",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:godbug",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "white"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:godbug",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:hercudrome",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "red"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:hercudrome",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:king_scarab",
+          "weight": 1,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "blue"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:king_scarab",
+          "weight": 1,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:rare_scarab",
+          "weight": 1,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "gold"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:rare_scarab",
+          "weight": 1,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:bug_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

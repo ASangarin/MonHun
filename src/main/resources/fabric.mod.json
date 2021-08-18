@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "monhun",
+  "version": "${version}",
+  "name": "Minecraft: Monster Hunter",
+  "description": "A mod that adds content from 'Monster Hunter'!",
+  "authors": ["ASangarin"],
+  "contributors": ["Authors of the used Libraries/APIs", "Everyone else who supported me!"],
+  "contact": {
+    "homepage": "https://github.com/ASangarin/MonHun/releases",
+    "issues": "https://github.com/ASangarin/MonHun/issues"
+  },
+  "license": "MIT (All rights go to Capcom)",
+  "icon": "assets/monhun/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "eu.asangarin.monhun.client.MonHunClient"
+    ],
+    "main": [
+      "eu.asangarin.monhun.MonHun"
+    ],
+    "cardinal-components": [
+      "eu.asangarin.monhun.components.MHComponents"
+    ],
+    "modmenu": [
+      "eu.asangarin.monhun.client.MHModMenu"
+    ]
+  },
+  "mixins": [
+    "monhun.mixins.json",
+    "monhun_client.mixins.json"
+  ],
+  "custom": {
+    "cardinal-components": [
+      "monhun:player_item_box",
+      "monhun:player_money",
+      "monhun:entity_tickable"
+    ],
+    "modmenu": {
+      "links": {
+        "Discord": "https://discord.gg/tZEESEBXRR",
+        "Github": "https://github.com/ASangarin/MonHun",
+        "Favro": "https://favro.com/organization/ba936b62bea0101ece08f041/f72d67d6f689e6aeb01e9f4f"
+      }
+    }
+  },
+  "depends": {
+    "fabricloader": ">=0.11.6",
+    "fabric": "*",
+    "minecraft": "1.17.1",
+    "cardinal-components-base": ">=3.0.0",
+    "cardinal-components-entity": ">=3.0.0",
+    "cloth-config2": ">=5.0.38",
+    "geckolib3": ">=3.0.10",
+    "libzoomer": "*"
+  }
+}

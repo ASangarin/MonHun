@@ -1,0 +1,70 @@
+{
+	"silence": {
+		"sounds": ["monhun:silence"]
+	},
+	
+    "consume_item": {
+        "sounds": ["monhun:consume_item"]
+    },
+    "gain_effect": {
+        "sounds": ["monhun:gain_effect"]
+    },
+    "horn": {
+        "sounds": ["monhun:horn"]
+    },
+    "mine_ore": {
+        "sounds": ["monhun:mine_ore"]
+    },
+    "sonic_bomb": {
+        "sounds": ["monhun:sonic_bomb"]
+    },
+    "flash_bomb": {
+        "sounds": ["monhun:sonic_bomb"]
+    },
+    "trap_setup": {
+        "sounds": ["monhun:trap_setup"]
+    },
+    "whetstone": {
+        "sounds": ["monhun:whetstone"]
+    },
+
+    "bomb_explode": {
+        "sounds": ["monhun:bomb_explode"]
+    },
+    "bomb_fuse": {
+        "sounds": ["monhun:bomb_fuse"]
+    },
+
+    "thunderblight": {
+        "sounds": ["monhun:thunderblight"]
+    },
+    "dragonblight": {
+        "sounds": ["monhun:dragonblight"]
+    },
+    "iceblight": {
+        "sounds": ["monhun:iceblight"]
+    },
+    "waterblight": {
+        "sounds": ["monhun:waterblight"]
+    },
+    "fireblight": {
+        "sounds": ["monhun:fireblight"]
+    },
+
+    "paralysis_loop": {
+        "sounds": ["monhun:paralysis_loop"]
+    },
+    "paralysis_end": {
+        "sounds": ["monhun:paralysis_end"]
+    },
+
+    "butterfly_place": {
+        "sounds": ["monhun:butterfly/place_1", "monhun:butterfly/place_2", "monhun:butterfly/place_3"]
+    },
+    "butterfly_hurt": {
+        "sounds": ["monhun:butterfly/hurt"]
+    },
+    "butterfly_death": {
+        "sounds": ["monhun:butterfly/death"]
+    }
+}

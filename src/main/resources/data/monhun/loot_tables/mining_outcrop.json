@@ -1,0 +1,387 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "monhun:earth_crystal",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:machalite_ore",
+          "weight": 6,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:dragonite_ore",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:lightcrystal",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:novacrystal",
+          "weight": 2,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "black"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:stone",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "white"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:iron_ore",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "white"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:earth_crystal",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "white"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:machalite_ore",
+          "weight": 6,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "white"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:dragonite_ore",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "white"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:stone",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "red"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:iron_ore",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "red"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:earth_crystal",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "red"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:machalite_ore",
+          "weight": 6,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "red"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:dragonite_ore",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "red"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:firestone",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "red"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:firecell_stone",
+          "weight": 2,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "red"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:stone",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "blue"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:iron_ore",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "blue"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:earth_crystal",
+          "weight": 8,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "blue"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:machalite_ore",
+          "weight": 6,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "blue"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:dragonite_ore",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "blue"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:ice_crystal",
+          "weight": 6,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "blue"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:dragonite_ore",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "gold"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:bealite_ore",
+          "weight": 4,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "gold"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:carbalite_ore",
+          "weight": 2,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "gold"
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "monhun:fucium_ore",
+          "weight": 1,
+          "conditions": [
+            {
+              "condition": "block_state_property",
+              "block": "monhun:ore_block",
+              "properties": {
+                "type": "gold"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

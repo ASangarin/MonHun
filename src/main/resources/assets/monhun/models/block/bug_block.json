@@ -1,0 +1,46 @@
+{
+  "parent": "builtin/entity",
+  "texture_size": [8, 8],
+  "gui_light": "front",
+  "textures": {
+    "particle": "monhun:block/invisible"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [45, -180, -45],
+      "scale": [2, 2, 2]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [45, -180, -45],
+      "scale": [2, 2, 2]
+    },
+    "firstperson_righthand": {
+      "rotation": [80, -180, -40],
+      "translation": [0, 0.75, 0],
+      "scale": [2, 2, 2]
+    },
+    "firstperson_lefthand": {
+      "rotation": [80, -180, -40],
+      "translation": [0, 0.75, 0],
+      "scale": [2, 2, 2]
+    },
+    "ground": {
+      "scale": [2.5, 2.5, 2.5]
+    },
+    "gui": {
+      "rotation": [-90, 0, 0],
+      "translation": [0, -0.5, 0],
+      "scale": [3.5, 3.5, 3.5]
+    },
+    "head": {
+      "rotation": [0, -180, 0],
+      "translation": [0, 12, 0],
+      "scale": [4, 4, 4]
+    },
+    "fixed": {
+      "rotation": [-90, 0, 0],
+      "translation": [0, -1, -0.25],
+      "scale": [4, 4, 4]
+    }
+  }
+}

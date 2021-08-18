@@ -1,0 +1,366 @@
+{
+    "stats": {
+		"low": {
+            "health": 2310,
+            "limp": 18,
+            "capture": 23
+		},
+		"high": {
+            "health": 2940,
+            "limp": 16,
+            "capture": 21
+		},
+		"g": {
+            "health": 5460,
+            "limp": 16,
+            "capture": 15
+		},
+        "enraged": {
+            "duration": 80,
+            "attack": 1.3,
+            "defense": 1.1
+        }
+    },
+    "hitzones": {
+        "head": {
+            "cut": 65,
+            "impact": 65,
+            "shot": 55,
+            "fire": 0,
+            "water": 10,
+            "ice": 10,
+            "thunder": 15,
+            "dragon": 20
+        },
+        "neck": {
+            "cut": 30,
+            "impact": 30,
+            "shot": 20,
+            "fire": 0,
+            "water": 10,
+            "ice": 10,
+            "thunder": 10,
+            "dragon": 10
+        },
+        "back": {
+            "cut": 25,
+            "impact": 30,
+            "shot": 20,
+            "fire": 15,
+            "water": 10,
+            "ice": 10,
+            "thunder": 20,
+            "dragon": 25
+        },
+        "stomach": {
+            "cut": 40,
+            "impact": 50,
+            "shot": 15,
+            "fire": 0,
+            "water": 5,
+            "ice": 5,
+            "thunder": 10,
+            "dragon": 20
+        },
+        "tail": {
+            "cut": 45,
+            "impact": 40,
+            "shot": 25,
+            "fire": 0,
+            "water": 5,
+            "ice": 5,
+            "thunder": 10,
+            "dragon": 20
+        },
+        "wings": {
+            "cut": 25,
+            "impact": 20,
+            "shot": 25,
+            "fire": 0,
+            "water": 10,
+            "ice": 10,
+            "thunder": 25,
+            "dragon": 35
+        },
+        "legs": {
+            "cut": 30,
+            "impact": 25,
+            "shot": 45,
+            "fire": 0,
+            "water": 5,
+            "ice": 5,
+            "thunder": 10,
+            "dragon": 10
+        }
+    },
+    "tolerance": {
+        "poison": {
+            "initial": 180,
+            "increase": 100,
+            "max": 580,
+            "duration": 60,
+            "damage": 150
+        },
+        "sleep": {
+            "initial": 180,
+            "increase": 100,
+            "max": 580,
+            "duration": 40
+        },
+        "paralysis": {
+            "initial": 180,
+            "increase": 110,
+            "max": 730,
+            "duration": 10
+        },
+        "exhaust": {
+            "initial": 180,
+            "increase": 75,
+            "max": 480
+        },
+        "ko": {
+            "initial": 150,
+            "increase": 150,
+            "max": 750,
+            "duration": 10
+        },
+        "blast": {
+            "initial": 70,
+            "increase": 30,
+            "max": 670,
+            "damage": 100,
+            "reduce": false
+        }
+    },
+    "drops": {
+        "low": {
+            "carve": [{
+                    "item": "rathalos_scale",
+                    "chance": 40
+                }, {
+                    "item": "rathalos_shell",
+                    "chance": 28
+                }, {
+                    "item": "rathalos_webbing",
+                    "chance": 19
+                }, {
+                    "item": "flame_sac",
+                    "chance": 8
+                }, {
+                    "item": "rath_marrow",
+                    "chance": 5
+                }
+            ],
+            "tail": [{
+                    "item": "rathalos_tail",
+                    "chance": 60
+                }, {
+                    "item": "rathalos_scale",
+                    "chance": 20
+                }, {
+                    "item": "rath_marrow",
+                    "chance": 17
+                }, {
+                    "item": "rathalos_plate",
+                    "chance": 3
+                }
+            ],
+            "shiny": [{
+                    "item": "wyvern_tear",
+                    "chance": 74
+                }, {
+                    "item": "rathalos_scale",
+                    "chance": 24
+                }, {
+                    "item": "rathalos_plate",
+                    "chance": 2
+                }
+            ],
+            "capture": [{
+                    "item": "rathalos_shell",
+                    "chance": 42
+                }, {
+                    "item": "rathalos_webbing",
+                    "chance": 29
+                }, {
+                    "item": "rath_marrow",
+                    "chance": 18
+                }, {
+                    "item": "rathalos_tail",
+                    "chance": 9
+                }, {
+                    "item": "rathalos_plate",
+                    "chance": 2
+                }
+            ],
+            "break": {
+                "head": [{
+                    "item": "rathalos_scale",
+                    "chance": 66
+                }, {
+                    "item": "rathalos_shell",
+                    "chance": 30
+                }, {
+                    "item": "rathalos_plate",
+                    "chance": 4
+                }
+                ],
+                "wing": [{
+                    "item": "rath_wingtalon",
+                    "chance": 70
+                }, {
+                    "item": "rathalos_webbing",
+                    "chance": 15
+                }, {
+                    "item": "wyvern_claw",
+                    "chance": 15,
+					"amount": 4
+                }
+                ],
+                "back": [{
+                    "item": "rathalos_shell",
+                    "chance": 69
+                }, {
+                    "item": "rath_marrow",
+                    "chance": 30
+                }, {
+                    "item": "rathalos_plate",
+                    "chance": 1
+                }
+                ]
+            }
+        },
+        "high": {
+            "carve": [{
+                    "item": "rathalos_scale_plus",
+                    "chance": 38
+                }, {
+                    "item": "rathalos_carapace",
+                    "chance": 29
+                }, {
+                    "item": "inferno_sac",
+                    "chance": 15
+                }, {
+                    "item": "rathalos_wing",
+                    "chance": 13
+                }, {
+                    "item": "rath_medulla",
+                    "chance": 5
+                }
+            ],
+            "tail": [{
+                    "item": "rathalos_tail",
+                    "chance": 48
+                }, {
+                    "item": "rathalos_scale_plus",
+                    "chance": 22
+                }, {
+                    "item": "rathalos_plate",
+                    "chance": 10
+                }, {
+                    "item": "rath_medulla",
+                    "chance": 10
+                }, {
+                    "item": "rathalos_scale",
+                    "chance": 7
+                }, {
+                    "item": "rathalos_ruby",
+                    "chance": 3
+                }
+            ],
+            "shiny": [{
+                    "item": "wyvern_tear",
+                    "chance": 38
+                }, {
+                    "item": "large_wyvern_tear",
+                    "chance": 37
+                }, {
+                    "item": "rathalos_scale_plus",
+                    "chance": 23
+                }, {
+                    "item": "rathalos_ruby",
+                    "chance": 2
+                }
+            ],
+            "capture": [{
+                    "item": "rathalos_carapace",
+                    "chance": 38
+                }, {
+                    "item": "rathalos_webbing",
+                    "chance": 18,
+					"amount": 2
+                }, {
+                    "item": "rath_marrow",
+                    "chance": 16
+                }, {
+                    "item": "rathalos_tail",
+                    "chance": 12
+                }, {
+                    "item": "rath_medulla",
+                    "chance": 8
+                }, {
+                    "item": "rathalos_plate",
+                    "chance": 5
+                }, {
+                    "item": "rathalos_ruby",
+                    "chance": 3
+                }
+            ],
+            "break": {
+                "head": [{
+                    "item": "rathalos_scale_plus",
+                    "chance": 57
+                }, {
+                    "item": "rathalos_carapace",
+                    "chance": 25
+                }, {
+                    "item": "rathalos_shell",
+                    "chance": 8,
+					"amount": 2
+                }, {
+                    "item": "rathalos_plate",
+                    "chance": 6
+                }, {
+                    "item": "rathalos_ruby",
+                    "chance": 4
+                }
+                ],
+                "wing": [{
+                    "item": "rath_wingtalon",
+                    "chance": 60,
+					"amount": 2
+                }, {
+                    "item": "rathalos_wing",
+                    "chance": 25
+                }, {
+                    "item": "wyvern_claw",
+                    "chance": 15,
+					"amount": 5
+                }
+                ],
+                "back": [{
+                    "item": "rathalos_carapace",
+                    "chance": 69
+                }, {
+                    "item": "rath_medulla",
+                    "chance": 30
+                }, {
+                    "item": "rathalos_ruby",
+                    "chance": 1
+                }
+                ]
+            }
+        },
+        "g": {
+            "carve": [],
+            "tail": [],
+            "shiny": [],
+            "capture": [],
+            "break": {
+                "head": [],
+                "wing": [],
+                "back": []
+            }
+        }
+    }
+}
