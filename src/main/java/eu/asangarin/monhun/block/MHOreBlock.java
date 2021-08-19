@@ -7,7 +7,6 @@ import eu.asangarin.monhun.item.MHPickaxeItem;
 import eu.asangarin.monhun.item.MHToolItem;
 import eu.asangarin.monhun.managers.MHBlocks;
 import eu.asangarin.monhun.managers.MHSounds;
-import eu.asangarin.monhun.util.enums.MHGatheringType;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -21,7 +20,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.text.Text;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.Identifier;
@@ -32,14 +30,9 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @SuppressWarnings("deprecation")
 public class MHOreBlock extends MHGatheringBlock {
 	public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
-	public static final Map<MHGatheringType, List<Text>> AVAILABLE_ORES = new HashMap<>();
 	public static final Identifier ORE_LOOTTABLE = MonHun.i("mining_outcrop");
 
 	public MHOreBlock() {
@@ -71,8 +64,7 @@ public class MHOreBlock extends MHGatheringBlock {
 
 	@Override
 	protected void tryBreak(ItemStack stack, World world, PlayerEntity player) {
-		if(stack.getItem() instanceof MHToolItem tool)
-			tool.tryBreak(stack, world, player);
+		if (stack.getItem() instanceof MHToolItem tool) tool.tryBreak(stack, world, player);
 	}
 
 	@Override
@@ -128,10 +120,5 @@ public class MHOreBlock extends MHGatheringBlock {
 	@Override
 	public MHGatheringBlockEntity createGatheringBlockEntity(BlockPos pos, BlockState state) {
 		return new MHOreBlockEntity(pos, state);
-	}
-
-	@Override
-	protected List<Text> getAvailableTypes(MHGatheringType type) {
-		return AVAILABLE_ORES.get(type);
 	}
 }

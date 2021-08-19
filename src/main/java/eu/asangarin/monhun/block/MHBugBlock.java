@@ -24,7 +24,6 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -32,13 +31,8 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @SuppressWarnings("deprecation")
 public class MHBugBlock extends MHGatheringBlock implements INoBox, IColorProvider {
-	public static final Map<MHGatheringType, List<Text>> AVAILABLE_BUGS = new HashMap<>();
 	public static final Identifier BUG_LOOTTABLE = MonHun.i("flying_bug");
 	private static final BlockSoundGroup BUG_SOUNDS = new BlockSoundGroup(1.0F, 1.0F, MHSounds.BUTTERFLY_PLACE, MHSounds.SILENCE,
 			MHSounds.BUTTERFLY_DEATH, MHSounds.SILENCE, MHSounds.SILENCE);
@@ -49,8 +43,7 @@ public class MHBugBlock extends MHGatheringBlock implements INoBox, IColorProvid
 
 	@Override
 	protected void tryBreak(ItemStack stack, World world, PlayerEntity player) {
-		if(stack.getItem() instanceof MHToolItem tool)
-			tool.tryBreak(stack, world, player);
+		if (stack.getItem() instanceof MHToolItem tool) tool.tryBreak(stack, world, player);
 	}
 
 	@Override
@@ -105,11 +98,6 @@ public class MHBugBlock extends MHGatheringBlock implements INoBox, IColorProvid
 
 			bugBlockEntity.setHurt();
 		}
-	}
-
-	@Override
-	protected List<Text> getAvailableTypes(MHGatheringType type) {
-		return AVAILABLE_BUGS.get(type);
 	}
 
 	@Override

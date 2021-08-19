@@ -32,6 +32,7 @@ import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.minecraft.block.Block;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemGroup;
@@ -136,7 +137,7 @@ public class MonHun implements ModInitializer {
 		});
 	}
 
-	public void registerCallbacks() {
+	private void registerCallbacks() {
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
 			@Override
 			public Identifier getFabricId() {
@@ -159,20 +160,18 @@ public class MonHun implements ModInitializer {
 			}
 		});
 		LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, table, setter) -> {
-			if (id.equals(MHOreBlock.ORE_LOOTTABLE)) {
-				MHOreBlock.AVAILABLE_ORES.clear();
-				Map<MHGatheringType, List<Text>> available = getItemsForOreType(table,
-						type -> MHBlocks.ORE_BLOCK.getDefaultState().with(MHGatheringBlock.GATHERING_TYPE, type));
-				MHOreBlock.AVAILABLE_ORES.putAll(available);
-				return;
-			}
-			if (id.equals(MHBugBlock.BUG_LOOTTABLE)) {
-				MHBugBlock.AVAILABLE_BUGS.clear();
-				Map<MHGatheringType, List<Text>> available = getItemsForOreType(table,
-						type -> MHBlocks.BUG_BLOCK.getDefaultState().with(MHGatheringBlock.GATHERING_TYPE, type));
-				MHBugBlock.AVAILABLE_BUGS.putAll(available);
-			}
+			if (id.equals(MHOreBlock.ORE_LOOTTABLE)) addType(MHOreBlock.class, table, MHBlocks.ORE_BLOCK);
+			if (id.equals(MHBugBlock.BUG_LOOTTABLE)) addType(MHBugBlock.class, table, MHBlocks.BUG_BLOCK);
 		});
+	}
+
+	private void addType(Class<? extends MHGatheringBlock> clazz, FabricLootSupplierBuilder table, Block block) {
+		if(!MHGatheringBlock.AVAILABLE_RESOURCES.containsKey(clazz))
+			MHGatheringBlock.AVAILABLE_RESOURCES.put(clazz, new MHGatheringBlock.AvailableResources());
+		MHGatheringBlock.AVAILABLE_RESOURCES.get(clazz).clear();
+		Map<MHGatheringType, List<Text>> available = getItemsForOreType(table,
+				type -> block.getDefaultState().with(MHGatheringBlock.GATHERING_TYPE, type));
+		MHGatheringBlock.AVAILABLE_RESOURCES.get(clazz).putAll(available);
 	}
 
 	private Map<MHGatheringType, List<Text>> getItemsForOreType(FabricLootSupplierBuilder table, IBlockStateProvider stateProvider) {

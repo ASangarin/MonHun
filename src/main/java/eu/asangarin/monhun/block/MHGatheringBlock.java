@@ -38,9 +38,13 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class MHGatheringBlock extends Block implements GatheringBlockEntityProvider, IGatheringSpot {
+	public static final Map<Class<? extends MHGatheringBlock>, AvailableResources> AVAILABLE_RESOURCES = new HashMap<>();
 	public static final EnumProperty<MHGatheringType> GATHERING_TYPE = EnumProperty.of("type", MHGatheringType.class);
 
 	public MHGatheringBlock(Settings settings) {
@@ -93,13 +97,16 @@ public abstract class MHGatheringBlock extends Block implements GatheringBlockEn
 		return ActionResult.PASS;
 	}
 
-	protected void tryBreak(ItemStack stack, World world, PlayerEntity player) {}
+	protected void tryBreak(ItemStack stack, World world, PlayerEntity player) {
+	}
 
 	protected abstract boolean canGather(ItemStack stack);
 
-	protected void playClientGatherEffects(World world, BlockPos pos) {}
+	protected void playClientGatherEffects(World world, BlockPos pos) {
+	}
 
-	protected void playServerGatherEffects(World world, BlockPos pos) {}
+	protected void playServerGatherEffects(World world, BlockPos pos) {
+	}
 
 	protected abstract Identifier getLootTableIdent();
 
@@ -112,13 +119,17 @@ public abstract class MHGatheringBlock extends Block implements GatheringBlockEn
 		MHGatheringType type = MHGatheringType.fromStack(stack);
 		tooltip.add(type.getRarity().asText().formatted(Formatting.BOLD));
 		final List<Text> resources = getAvailableTypes(type);
-		if (resources == null) return;
+		if (resources == null || resources.isEmpty()) return;
 		tooltip.add(new TranslatableText("block.monhun.possible_resources").formatted(Formatting.GRAY).formatted(Formatting.UNDERLINE));
 		for (Text text : resources)
 			tooltip.add(text.copy().formatted(Formatting.AQUA));
 	}
 
-	protected abstract List<Text> getAvailableTypes(MHGatheringType type);
+	private List<Text> getAvailableTypes(MHGatheringType type) {
+		if (!AVAILABLE_RESOURCES.containsKey(getClass())) return Collections.emptyList();
+		AvailableResources resources = AVAILABLE_RESOURCES.get(getClass());
+		return resources.get(type);
+	}
 
 	@Override
 	public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
@@ -137,5 +148,21 @@ public abstract class MHGatheringBlock extends Block implements GatheringBlockEn
 		nbt.putString("type", type.asString());
 		stack.setNbt(nbt);
 		return stack;
+	}
+
+	public static class AvailableResources {
+		Map<MHGatheringType, List<Text>> available = new HashMap<>();
+
+		public void clear() {
+			this.available.clear();
+		}
+
+		public void putAll(Map<MHGatheringType, List<Text>> available) {
+			this.available.putAll(available);
+		}
+
+		public List<Text> get(MHGatheringType type) {
+			return this.available.get(type);
+		}
 	}
 }
