@@ -205,6 +205,8 @@ public abstract class MHInGameHud extends DrawableHelper {
 	@Inject(method = "renderVignetteOverlay", at = @At("HEAD"))
 	private void renderVignetteOverlay(Entity entity, CallbackInfo ci) {
 		if (heatTicks < 0.1f) return;
+		if ((entity instanceof PlayerEntity player) && player.getAbilities().creativeMode) return;
+
 		RenderSystem.disableDepthTest();
 		RenderSystem.depthMask(false);
 		RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ZERO, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE,
@@ -217,10 +219,10 @@ public abstract class MHInGameHud extends DrawableHelper {
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferBuilder = tessellator.getBuffer();
 		bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
-		bufferBuilder.vertex(0.0D, this.scaledHeight, -90.0D).texture(0.0F, 1.0F).next();
-		bufferBuilder.vertex(this.scaledWidth, this.scaledHeight, -90.0D).texture(1.0F, 1.0F).next();
-		bufferBuilder.vertex(this.scaledWidth, 0.0D, -90.0D).texture(1.0F, 0.0F).next();
-		bufferBuilder.vertex(0.0D, 0.0D, -90.0D).texture(0.0F, 0.0F).next();
+		bufferBuilder.vertex(0.0D, this.scaledHeight, 0.0D).texture(0.0F, 1.0F).next();
+		bufferBuilder.vertex(this.scaledWidth, this.scaledHeight, 0.0D).texture(1.0F, 1.0F).next();
+		bufferBuilder.vertex(this.scaledWidth, 0.0D, 0.0D).texture(1.0F, 0.0F).next();
+		bufferBuilder.vertex(0.0D, 0.0D, 0.0D).texture(0.0F, 0.0F).next();
 		tessellator.draw();
 		RenderSystem.depthMask(true);
 		RenderSystem.enableDepthTest();
@@ -318,9 +320,8 @@ public abstract class MHInGameHud extends DrawableHelper {
 				Box box = entity.getBoundingBox().stretch(vec3d2.multiply(d)).expand(1.0D, 1.0D, 1.0D);
 				EntityHitResult entityHitResult = ProjectileUtil
 						.raycast(entity, vec3d, vec3d3, box, (entityx) -> !entityx.isSpectator() && entityx.collides(), e);
-				if (entityHitResult != null) {
+				if (entityHitResult != null)
 					hitResult = entityHitResult;
-				}
 			}
 		}
 
