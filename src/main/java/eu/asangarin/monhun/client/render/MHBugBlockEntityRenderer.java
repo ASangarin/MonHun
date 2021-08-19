@@ -1,7 +1,7 @@
 package eu.asangarin.monhun.client.render;
 
 import eu.asangarin.monhun.MonHun;
-import eu.asangarin.monhun.block.MHBugBlock;
+import eu.asangarin.monhun.block.MHGatheringBlock;
 import eu.asangarin.monhun.block.entity.MHBugBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -51,17 +51,17 @@ public class MHBugBlockEntityRenderer extends GeoBlockRenderer<MHBugBlockEntity>
 		Identifier texId = getBugTexture(tile.getCachedState());
 		MinecraftClient.getInstance().getTextureManager().bindTexture(texId);
 		RenderLayer renderType = getRenderType(tile, partialTicks, stack, bufferIn, null, packedLightIn, texId);
-		render(model, tile, partialTicks, renderType, stack, bufferIn, null, packedLightIn, getOverlayTexture(tile.getAge() + partialTicks, tile.getHurtTime()),
-				1.0f, 1.0f, 1.0f, 1.0f);
+		render(model, tile, partialTicks, renderType, stack, bufferIn, null, packedLightIn, getOverlayTexture(tile.getHurtTime()), 1.0f, 1.0f, 1.0f,
+				1.0f);
 		stack.pop();
 	}
 
-	private int getOverlayTexture(float progress, int hurtTime) {
+	private int getOverlayTexture(int hurtTime) {
 		return OverlayTexture.packUv(OverlayTexture.getU(0), OverlayTexture.getV(hurtTime > 0));
 	}
 
 	private Identifier getBugTexture(BlockState state) {
-		return switch (state.get(MHBugBlock.ORE_TYPE)) {
+		return switch (state.get(MHGatheringBlock.GATHERING_TYPE)) {
 			case WHITE -> WHITE_TEXTURE;
 			case RED -> RED_TEXTURE;
 			case BLUE -> BLUE_TEXTURE;

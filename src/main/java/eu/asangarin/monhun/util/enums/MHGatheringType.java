@@ -24,7 +24,7 @@ public enum MHGatheringType implements StringIdentifiable {
 
 	public static MHGatheringType fromStack(ItemStack stack) {
 		NbtCompound nbt = stack.getNbt();
-		if (nbt != null && nbt.contains("ore_type")) return MHGatheringType.fromString(nbt.getString("ore_type"));
+		if (nbt != null && nbt.contains("type")) return MHGatheringType.fromString(nbt.getString("type"));
 		return MHGatheringType.WHITE;
 	}
 

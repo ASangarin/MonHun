@@ -3,6 +3,7 @@ package eu.asangarin.monhun;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import eu.asangarin.monhun.block.MHBugBlock;
+import eu.asangarin.monhun.block.MHGatheringBlock;
 import eu.asangarin.monhun.block.MHOreBlock;
 import eu.asangarin.monhun.config.MHConfig;
 import eu.asangarin.monhun.managers.MHBlocks;
@@ -161,14 +162,14 @@ public class MonHun implements ModInitializer {
 			if (id.equals(MHOreBlock.ORE_LOOTTABLE)) {
 				MHOreBlock.AVAILABLE_ORES.clear();
 				Map<MHGatheringType, List<Text>> available = getItemsForOreType(table,
-						type -> MHBlocks.ORE_BLOCK.getDefaultState().with(MHOreBlock.ORE_TYPE, type));
+						type -> MHBlocks.ORE_BLOCK.getDefaultState().with(MHGatheringBlock.GATHERING_TYPE, type));
 				MHOreBlock.AVAILABLE_ORES.putAll(available);
 				return;
 			}
 			if (id.equals(MHBugBlock.BUG_LOOTTABLE)) {
 				MHBugBlock.AVAILABLE_BUGS.clear();
 				Map<MHGatheringType, List<Text>> available = getItemsForOreType(table,
-						type -> MHBlocks.BUG_BLOCK.getDefaultState().with(MHBugBlock.ORE_TYPE, type));
+						type -> MHBlocks.BUG_BLOCK.getDefaultState().with(MHGatheringBlock.GATHERING_TYPE, type));
 				MHBugBlock.AVAILABLE_BUGS.putAll(available);
 			}
 		});
