@@ -9,13 +9,14 @@
   ],
   "contributors": [
     "Authors of the used Libraries/APIs",
-    "Everyone else who supported me!"
+    "Everyone else who supported me!",
+    "(All rights go to Capcom)"
   ],
   "contact": {
     "homepage": "https://github.com/ASangarin/MonHun",
     "issues": "https://github.com/ASangarin/MonHun/issues"
   },
-  "license": "MIT (All rights go to Capcom)",
+  "license": "MIT",
   "icon": "assets/monhun/icon.png",
   "environment": "*",
   "entrypoints": {
