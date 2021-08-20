@@ -4,10 +4,15 @@
   "version": "${version}",
   "name": "Minecraft: Monster Hunter",
   "description": "A mod that adds content from 'Monster Hunter'!",
-  "authors": ["ASangarin"],
-  "contributors": ["Authors of the used Libraries/APIs", "Everyone else who supported me!"],
+  "authors": [
+    "ASangarin"
+  ],
+  "contributors": [
+    "Authors of the used Libraries/APIs",
+    "Everyone else who supported me!"
+  ],
   "contact": {
-    "homepage": "https://github.com/ASangarin/MonHun/releases",
+    "homepage": "https://github.com/ASangarin/MonHun",
     "issues": "https://github.com/ASangarin/MonHun/issues"
   },
   "license": "MIT (All rights go to Capcom)",

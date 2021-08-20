@@ -19,6 +19,7 @@ import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
@@ -41,6 +42,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.text.DecimalFormat;
+import java.util.Collection;
 import java.util.Random;
 
 @Mixin(InGameHud.class)
@@ -281,17 +283,29 @@ public abstract class MHInGameHud extends DrawableHelper {
 	private void renderZenny(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
 		ZennyRenderType renderType = MonHun.getConfig().getClient().getRendering().getRenderZennyAndPoints();
 		if (renderType == ZennyRenderType.NEVER) return;
+		PlayerEntity player = getCameraPlayer();
+		if (renderType == ZennyRenderType.IN_SHOP) // TODO: Logic for when shop menu gets added
+			return;
 
-		String zenny = Integer.toString(MHComponents.MONEY.get(getCameraPlayer()).getZenny());
-		String points = Integer.toString(MHComponents.MONEY.get(getCameraPlayer()).getPoints());
+		String zenny = Integer.toString(MHComponents.MONEY.get(player).getZenny());
+		String points = Integer.toString(MHComponents.MONEY.get(player).getPoints());
 		RenderSystem.enableBlend();
 		RenderSystem.setShaderTexture(0, MH_ICONS_TEXTURE);
-		this.drawTexture(matrices, scaledWidth - 96, 22, 168, 0, 88, 14);
-		this.drawTexture(matrices, scaledWidth - 96, 6, 168, 16, 88, 14);
-		client.textRenderer.draw(matrices, zenny, scaledWidth - (20 + (6 * zenny.length())), 10, 0xFFFFFF);
-		client.textRenderer.draw(matrices, points, scaledWidth - (32 + (6 * points.length())), 26, 0xFFFFFF);
-		client.textRenderer.draw(matrices, "z", scaledWidth - 20, 10, 0xFFFFFF);
-		client.textRenderer.draw(matrices, "pts", scaledWidth - 32, 26, 0xFFFFFF);
+
+		int yMod = 0;
+		Collection<StatusEffectInstance> collection = player.getStatusEffects();
+		if (collection.stream().anyMatch(StatusEffectInstance::shouldShowIcon)) {
+			yMod = 21;
+			if(collection.stream().anyMatch(effect -> effect.shouldShowIcon() && !effect.getEffectType().isBeneficial()))
+				yMod += 26;
+		}
+
+		this.drawTexture(matrices, scaledWidth - 90, 22 + yMod, 168, 0, 88, 14);
+		this.drawTexture(matrices, scaledWidth - 90, 6 + yMod, 168, 16, 88, 14);
+		client.textRenderer.draw(matrices, zenny, scaledWidth - (14 + (6 * zenny.length())), 10 + yMod, 0xFFFFFF);
+		client.textRenderer.draw(matrices, points, scaledWidth - (26 + (6 * points.length())), 26 + yMod, 0xFFFFFF);
+		client.textRenderer.draw(matrices, "z", scaledWidth - 14, 10 + yMod, 0xFFFFFF);
+		client.textRenderer.draw(matrices, "pts", scaledWidth - 26, 26 + yMod, 0xFFFFFF);
 		RenderSystem.disableBlend();
 	}
 

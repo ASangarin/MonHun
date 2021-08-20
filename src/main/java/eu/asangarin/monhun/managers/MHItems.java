@@ -42,7 +42,6 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-import java.lang.reflect.Field;
 import java.util.UUID;
 
 @SuppressWarnings({"ConstantConditions", "unused"})
@@ -85,8 +84,7 @@ public class MHItems {
 	public static final MHBaseItem RESOURCE_ITEM = new MHResourceItem();
 
 	// Consumables
-	public static final MHBaseItem POTION = new MHConsumableItem(ItemColors.GREEN, MHRarity.RARE_1, 10,
-			(stack, world, user) -> user.heal(7f));
+	public static final MHBaseItem POTION = new MHConsumableItem(ItemColors.GREEN, MHRarity.RARE_1, 10, (stack, world, user) -> user.heal(7f));
 	public static final MHBaseItem MEGA_POTION = new MHConsumableItem(ItemColors.GREEN, MHRarity.RARE_2, 10,
 			(stack, world, user) -> user.heal(14f));
 	public static final MHBaseItem NUTRIENTS = new MHConsumableItem(ItemColors.LIGHT_BLUE, MHRarity.RARE_2, 5,
@@ -115,8 +113,10 @@ public class MHItems {
 			MHConsumableItem.ConsumableAction.potion(StatusEffects.RESISTANCE, 2400, 1));
 	public static final MHBaseItem ADAMANT_PILL = new MHConsumableItem(MHItemTexture.PILL, ItemColors.ORANGE, MHRarity.RARE_1, 5,
 			MHConsumableItem.ConsumableAction.potion(StatusEffects.RESISTANCE, 120, 4));
-	public static final MHBaseItem COOL_DRINK = new MHConsumableItem(MHItemTexture.POTION, ItemColors.WHITE, MHRarity.RARE_1, 5, MHConsumableItem.ConsumableAction.potion(MHStatusEffects.COOL_DRINK, 6000, 0));
-	public static final MHBaseItem HOT_DRINK = new MHConsumableItem(MHItemTexture.POTION, ItemColors.RED, MHRarity.RARE_1, 5, MHConsumableItem.ConsumableAction.potion(MHStatusEffects.HOT_DRINK, 6000, 0));
+	public static final MHBaseItem COOL_DRINK = new MHConsumableItem(MHItemTexture.POTION, ItemColors.WHITE, MHRarity.RARE_1, 5,
+			MHConsumableItem.ConsumableAction.potion(MHStatusEffects.COOL_DRINK, 6000, 0));
+	public static final MHBaseItem HOT_DRINK = new MHConsumableItem(MHItemTexture.POTION, ItemColors.RED, MHRarity.RARE_1, 5,
+			MHConsumableItem.ConsumableAction.potion(MHStatusEffects.HOT_DRINK, 6000, 0));
 	public static final MHBaseItem CLEANSER = new MHWIPItem(MHItemTexture.POTION, ItemColors.LIGHT_BLUE, MHRarity.RARE_2, 10,
 			MonHun.CONSUMABLE_GROUP);
 	public static final MHBaseItem PSYCHOSERUM = new MHWIPItem(MHItemTexture.POTION, ItemColors.ORANGE, MHRarity.RARE_3, 10,
@@ -153,14 +153,12 @@ public class MHItems {
 	public static final MHBaseItem CHILLED_MEAT = new MHConsumableItem(MHItemTexture.MEAT, ItemColors.LIGHT_BLUE, MHRarity.RARE_1, 10,
 			(stack, world, user) -> {
 				user.addStatusEffect(new StatusEffectInstance(MHStatusEffects.COOL_DRINK, 6000, 0));
-				if(user instanceof PlayerEntity player)
-					player.getHungerManager().add(12, 8.5f);
+				if (user instanceof PlayerEntity player) player.getHungerManager().add(12, 8.5f);
 			});
 	public static final MHBaseItem HOT_MEAT = new MHConsumableItem(MHItemTexture.MEAT, ItemColors.RED, MHRarity.RARE_1, 10,
 			(stack, world, user) -> {
 				user.addStatusEffect(new StatusEffectInstance(MHStatusEffects.HOT_DRINK, 6000, 0));
-				if(user instanceof PlayerEntity player)
-					player.getHungerManager().add(12, 8.5f);
+				if (user instanceof PlayerEntity player) player.getHungerManager().add(12, 8.5f);
 			});
 	public static final MHBaseItem MOSSWINE_JERKY = new MHConsumableItem(MHItemTexture.MEAT, ItemColors.PINK, MHRarity.RARE_2, 5,
 			MHConsumableItem.ConsumableAction.JERKY_ACTION, true, true);
@@ -501,22 +499,11 @@ public class MHItems {
 	//public static final MHBaseItem PAWPRINT_TICKET = new MHWIPItem(MHItemTexture.TICKET, ItemColors.WHITE, MHRarity.RARE_8, 64, MonHun.MATERIAL_GROUP);
 
 	public static final MHBaseItem WYVERN_TEAR = new MHAccountItem(MHItemTexture.MONSTERPART, ItemColors.LIGHT_BLUE, MHRarity.RARE_3, 10, 500);
-	public static final MHBaseItem LARGE_WYVERN_TEAR = new MHAccountItem(MHItemTexture.MONSTERPART, ItemColors.LIGHT_BLUE, MHRarity.RARE_5, 10, 2500);
+	public static final MHBaseItem LARGE_WYVERN_TEAR = new MHAccountItem(MHItemTexture.MONSTERPART, ItemColors.LIGHT_BLUE, MHRarity.RARE_5, 10,
+			2500);
 
 	public static final MHSpawnEggItem RATHALOS_SPAWN_EGG = new MHSpawnEggItem(MHEntities.RATHALOS, 0xDF3916, 0x4A4A4A,
 			MHMonsterClass.FLYING_WYVERN);
-
-	public static void onInitialize() {
-		for (Field f : MHItems.class.getDeclaredFields()) {
-			try {
-				if (!Item.class.isAssignableFrom(f.getType())) continue;
-				Registry.register(Registry.ITEM, MonHun.i(f.getName().toLowerCase()), (Item) f.get(null));
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		}
-		MHWeapons.onInitialize();
-	}
 
 	private static void modifyHealth(LivingEntity user, double value) {
 		EntityAttributeInstance instance = user.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
@@ -527,7 +514,8 @@ public class MHItems {
 				instance.addPersistentModifier(
 						new EntityAttributeModifier(MHItems.hpAttUUID, "monhun_maxhealth", 8, EntityAttributeModifier.Operation.ADDITION));
 			}
-		} else instance.addPersistentModifier(new EntityAttributeModifier(MHItems.hpAttUUID, "monhun_maxhealth", value, EntityAttributeModifier.Operation.ADDITION));
+		} else instance.addPersistentModifier(
+				new EntityAttributeModifier(MHItems.hpAttUUID, "monhun_maxhealth", value, EntityAttributeModifier.Operation.ADDITION));
 	}
 
 	public static ItemStack getStackOf(String id, int amount) {

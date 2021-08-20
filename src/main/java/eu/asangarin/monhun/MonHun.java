@@ -2,13 +2,17 @@ package eu.asangarin.monhun;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import eu.asangarin.monhun.block.MHBugBlock;
-import eu.asangarin.monhun.block.MHGatheringBlock;
-import eu.asangarin.monhun.block.MHOreBlock;
+import eu.asangarin.monhun.block.MHBlockItem;
+import eu.asangarin.monhun.block.gather.MHBugBlock;
+import eu.asangarin.monhun.block.gather.MHGatheringBlock;
+import eu.asangarin.monhun.block.gather.MHMushroomBlock;
+import eu.asangarin.monhun.block.gather.MHOreBlock;
 import eu.asangarin.monhun.config.MHConfig;
+import eu.asangarin.monhun.effects.IPotionable;
 import eu.asangarin.monhun.managers.MHBlocks;
 import eu.asangarin.monhun.managers.MHEntities;
 import eu.asangarin.monhun.managers.MHItems;
+import eu.asangarin.monhun.managers.MHParticles;
 import eu.asangarin.monhun.managers.MHStatusEffects;
 import eu.asangarin.monhun.managers.MHWeapons;
 import eu.asangarin.monhun.mixin.loot.MHBlockStatePropertyLootConditionAccessor;
@@ -20,6 +24,7 @@ import eu.asangarin.monhun.monsters.MHMonsterManager;
 import eu.asangarin.monhun.monsters.data.MHMonsterData;
 import eu.asangarin.monhun.network.MHNetwork;
 import eu.asangarin.monhun.util.MHMonsterDataDeserializer;
+import eu.asangarin.monhun.util.RegistryHelper;
 import eu.asangarin.monhun.util.enums.MHGatheringType;
 import eu.asangarin.monhun.util.interfaces.IBlockStateProvider;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -34,7 +39,9 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.block.Block;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootPool;
@@ -43,6 +50,8 @@ import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LootPoolEntry;
+import net.minecraft.particle.ParticleType;
+import net.minecraft.potion.Potion;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -50,6 +59,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 import software.bernie.example.GeckoLibMod;
 import software.bernie.geckolib3.GeckoLib;
 
@@ -63,15 +73,8 @@ import java.util.List;
 import java.util.Map;
 
 public class MonHun implements ModInitializer {
-	private static MHConfig config;
 	public static final Gson GSON = new GsonBuilder().registerTypeAdapter(MHMonsterData.class, new MHMonsterDataDeserializer()).setPrettyPrinting()
 			.create();
-
-	public MonHun() {
-		GeckoLibMod.DISABLE_IN_DEV = true;
-		GeckoLib.initialize();
-	}
-
 	public static final ItemGroup WEAPON_GROUP = FabricItemGroupBuilder.create(MonHun.i("weapons")).icon(() -> new ItemStack(MHWeapons.GS_GUILD))
 			.build();
 	/*public static final ItemGroup ARMOR_GROUP = FabricItemGroupBuilder.create(MonHun.i("armor")).icon(() -> new ItemStack(MHItems.DUMMY_PLATE))
@@ -100,16 +103,36 @@ public class MonHun implements ModInitializer {
 			.build();
 	public static final ItemGroup SPAWN_EGG_GROUP = FabricItemGroupBuilder.create(MonHun.i("spawn_eggs"))
 			.icon(() -> new ItemStack(MHItems.RATHALOS_SPAWN_EGG)).build();
+	private static MHConfig config;
+
+	public MonHun() {
+		GeckoLibMod.DISABLE_IN_DEV = true;
+		GeckoLib.initialize();
+	}
+
+	public static MHConfig getConfig() {
+		return config;
+	}
 
 	@Override
 	public void onInitialize() {
 		AutoConfig.register(MHConfig.class, PartitioningSerializer.wrap(GsonConfigSerializer::new));
 		config = AutoConfig.getConfigHolder(MHConfig.class).getConfig();
 
-		MHItems.onInitialize();
-		MHBlocks.onInitialize();
-		MHEntities.onInitialize();
-		MHStatusEffects.onInitialize();
+		RegistryHelper.registerAll(Registry.ITEM, MHItems.class, Item.class);
+		RegistryHelper.registerAll(Registry.ITEM, MHWeapons.class, Item.class);
+		RegistryHelper.registerAll(Registry.BLOCK, MHBlocks.class, Block.class);
+		RegistryHelper.registerAll(Registry.ITEM, MHBlocks.class, MHBlockItem.class, (ident) -> MonHun.i(ident.getPath().replace("_item", "")));
+		RegistryHelper.registerAll(Registry.STATUS_EFFECT, MHStatusEffects.class, StatusEffect.class, (effect, id) -> {
+			if (effect instanceof IPotionable potionable) Registry.register(Registry.POTION, MonHun.i(id.getPath() + "_potion"),
+					new Potion(new StatusEffectInstance(effect, potionable.defaultTime())));
+		});
+		RegistryHelper.registerAll(Registry.PARTICLE_TYPE, MHParticles.class, ParticleType.class);
+
+		MHBlocks.registerBlockEntities();
+		MHEntities.registerAttributes();
+		MHParticles.registerFactories();
+
 		MHNetwork.onServerInitialize();
 
 		registerCallbacks();
@@ -160,13 +183,22 @@ public class MonHun implements ModInitializer {
 			}
 		});
 		LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, table, setter) -> {
-			if (id.equals(MHOreBlock.ORE_LOOTTABLE)) addType(MHOreBlock.class, table, MHBlocks.ORE_BLOCK);
-			if (id.equals(MHBugBlock.BUG_LOOTTABLE)) addType(MHBugBlock.class, table, MHBlocks.BUG_BLOCK);
+			if (id.equals(MHOreBlock.LOOT)) addType(MHOreBlock.class, table, MHBlocks.ORE_BLOCK);
+			if (id.equals(MHBugBlock.LOOT)) addType(MHBugBlock.class, table, MHBlocks.BUG_BLOCK);
+			if (id.equals(MHMushroomBlock.LOOT)) addType(MHMushroomBlock.class, table, MHBlocks.MUSHROOM_BLOCK);
 		});
 	}
 
+	public static Identifier i(String key) {
+		return new Identifier("monhun", key);
+	}
+
+	public static void log(String message, Object... args) {
+		System.out.printf((message) + "%n", args);
+	}
+
 	private void addType(Class<? extends MHGatheringBlock> clazz, FabricLootSupplierBuilder table, Block block) {
-		if(!MHGatheringBlock.AVAILABLE_RESOURCES.containsKey(clazz))
+		if (!MHGatheringBlock.AVAILABLE_RESOURCES.containsKey(clazz))
 			MHGatheringBlock.AVAILABLE_RESOURCES.put(clazz, new MHGatheringBlock.AvailableResources());
 		MHGatheringBlock.AVAILABLE_RESOURCES.get(clazz).clear();
 		Map<MHGatheringType, List<Text>> available = getItemsForOreType(table,
@@ -189,8 +221,8 @@ public class MonHun implements ModInitializer {
 
 			for (MHItemEntryAccessor entry : entries) {
 				for (LootCondition condition : ((MHLootPoolEntryAccessor) entry).getConditions()) {
-					if (condition instanceof BlockStatePropertyLootCondition stateCondition && ((MHBlockStatePropertyLootConditionAccessor) stateCondition)
-							.getProperties().test(stateProvider.provide(type))) {
+					if (condition instanceof BlockStatePropertyLootCondition stateCondition && ((MHBlockStatePropertyLootConditionAccessor) stateCondition).getProperties()
+							.test(stateProvider.provide(type))) {
 						itemNames.add(entry.getItem().getName());
 					}
 				}
@@ -200,17 +232,5 @@ public class MonHun implements ModInitializer {
 		}
 
 		return availables;
-	}
-
-	public static Identifier i(String key) {
-		return new Identifier("monhun", key);
-	}
-
-	public static void log(String message, Object... args) {
-		System.out.printf((message) + "%n", args);
-	}
-
-	public static MHConfig getConfig() {
-		return config;
 	}
 }

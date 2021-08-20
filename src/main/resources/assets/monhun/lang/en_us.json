@@ -13,37 +13,31 @@
   "itemGroup.monhun.blocks": "MonHun Blocks",
   "itemGroup.monhun.account": "MonHun Account Items",
   "itemGroup.monhun.spawn_eggs": "MonHun Spawn Eggs",
-
   "effect.monhun.paralysis": "Paralysis",
   "effect.monhun.sleep": "Sleep",
   "effect.monhun.cool_drink": "Cool Drink",
   "effect.monhun.hot_drink": "Hot Drink",
   "effect.monhun.dash_juice": "Dash Juice",
   "effect.monhun.frozen_hunger": "Freezing Hunger",
-
   "binocular.monhun.too_far": "Too Far!",
   "binocular.monhun.distance": "(Distance: %s)",
-
   "gui.monhun.next": "Next Page",
   "gui.monhun.previous": "Previous Page",
-
   "block.monhun.supply_box": "Supply Box",
   "block.monhun.supply_box.desc": "A blue box filled with\ngoodies to bring on quests!\nInvaluable to many hunters.",
   "block.monhun.delivery_box": "Delivery Box",
   "block.monhun.delivery_box.desc": "A red box used to deliver\nmany quest and account items.\nInvaluable to all hunters.",
   "block.monhun.item_box": "Item Box",
   "block.monhun.item_box.desc": "A yellow box used to store\nmany different hunter items.\nInvaluable to all hunters.",
-
   "block.monhun.ore_block": "Ore Gathering Spot (%s)",
   "block.monhun.bug_block": "Bug Gathering Spot (%s)",
-
+  "block.monhun.mushroom_block": "Mushroom Gathering Spot (%s)",
   "block.monhun.gathering_color.white": "White",
   "block.monhun.gathering_color.red": "Red",
   "block.monhun.gathering_color.blue": "Blue",
   "block.monhun.gathering_color.gold": "Gold",
   "block.monhun.gathering_color.black": "Black",
   "block.monhun.possible_resources": "Possible Outcomes:",
-
   "item.monhun.gs_guild": "Guild Cleaver",
   "item.monhun.gs_guild.desc": "A Great Sword that's seen\nextended use for ages.\nGood for beginners, too.",
   "item.monhun.ls_guild": "Guild Blade",
@@ -72,11 +66,9 @@
   "item.monhun.hbg_guild.desc": "Tremendously powerful Heavy\nBowgun. Rightly called the\nsoul of modern technology.",
   "item.monhun.bow_guild": "Guild Bow",
   "item.monhun.bow_guild.desc": "A cheap, introductory Bow for\nnovice hunters. It comes with\narrows and a quiver.",
-
   "item.monhun.rarity.desc": "RARE %d",
   "item.monhun.supply.desc": "(Supply Item)",
   "item.monhun.account.desc": "(Account Item)",
-
   "item.monhun.book_of_combos_1": "Book of Combos 1",
   "item.monhun.book_of_combos_1.desc": "An introductory text for first-\ntime combiners. Improves your\ncombination success rate.",
   "item.monhun.book_of_combos_2": "Book of Combos 2",
@@ -567,19 +559,14 @@
   "item.monhun.commendation_g.desc": "A ticket awarded for\ngreat bravery. Collect\nenough and it might pay off.",
   "item.monhun.pawprint_stamp": "Pawprint Stamp",
   "item.monhun.pawprint_stamp.desc": "Lynian paper currency, stamped\nwith a pawprint. The letters\nwritten on it are unfamiliar.",
-
   "item.monhun.wyvern_tear": "Wyvern Tear",
   "item.monhun.wyvern_tear.desc": "Bitter tears wept by wyverns\non certain occasions.",
   "item.monhun.large_wyvern_tear": "Large Wyvern Tear",
   "item.monhun.large_wyvern_tear.desc": "Large, bitter tears wept by\nwyverns on certain occasions.",
-
   "item.monhun.xxxxx": "",
   "item.monhun.xxxxx.desc": "",
-
   "item.monhun.spawn_egg": "%s Spawn Egg",
-
   "entity.monhun.rathalos": "Rathalos",
-
   "monsterpart.rathalos.scale": "Rathalos Scale",
   "monsterpart.rathalos.scale.desc": "A Rathalos scale. Wyvern scales\nand shells such as this are\nfundamental forging materials.",
   "monsterpart.rathalos.scale_plus": "Rathalos Scale+",
@@ -604,7 +591,6 @@
   "monsterpart.rathalos.marrow.desc": "Recent advances allow this\nmarrow to be extracted. It\nignites on air contact.",
   "monsterpart.rathalos.medulla": "Rath Medulla",
   "monsterpart.rathalos.medulla.desc": "Only recently extractable\nthanks to advances in carving\ntechniques. Difficult to process.",
-
   "text.autoconfig.monhun.title": "Minecraft: Monster Hunter Config",
   "text.autoconfig.monhun.category.main": "Main Configuration",
   "text.autoconfig.monhun.category.client": "Client Configuration"

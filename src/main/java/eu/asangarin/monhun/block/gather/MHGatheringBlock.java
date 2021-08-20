@@ -1,6 +1,6 @@
-package eu.asangarin.monhun.block;
+package eu.asangarin.monhun.block.gather;
 
-import eu.asangarin.monhun.block.entity.MHGatheringBlockEntity;
+import eu.asangarin.monhun.block.entity.gather.MHAbstractGatheringBlockEntity;
 import eu.asangarin.monhun.network.MHNetwork;
 import eu.asangarin.monhun.network.MHS2CPackets;
 import eu.asangarin.monhun.network.PacketHelper;
@@ -11,6 +11,9 @@ import eu.asangarin.monhun.util.interfaces.IGatheringSpot;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
@@ -42,6 +45,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public abstract class MHGatheringBlock extends Block implements GatheringBlockEntityProvider, IGatheringSpot {
 	public static final Map<Class<? extends MHGatheringBlock>, AvailableResources> AVAILABLE_RESOURCES = new HashMap<>();
@@ -68,7 +72,15 @@ public abstract class MHGatheringBlock extends Block implements GatheringBlockEn
 	@SuppressWarnings({"ConstantConditions", "deprecation"})
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		ItemStack stack = player.getStackInHand(hand);
-		if (canGather(stack)) {
+		if (player.getAbilities().creativeMode) {
+			if (!world.isClient) {
+				if (!player.isSneaking()) world.setBlockState(pos, cycle(state));
+				else if (world.getBlockEntity(pos) instanceof MHAbstractGatheringBlockEntity gatherEntity)
+					gatherEntity.setShiny(!gatherEntity.isShiny());
+			}
+
+			return ActionResult.SUCCESS;
+		} else if (canGather(stack)) {
 			playClientGatherEffects(world, pos);
 
 			if (!world.isClient) {
@@ -78,18 +90,11 @@ public abstract class MHGatheringBlock extends Block implements GatheringBlockEn
 						(loot) -> player.getInventory().offerOrDrop(loot));
 				if (!player.getAbilities().creativeMode) tryBreak(stack, world, player);
 				playServerGatherEffects(world, pos);
-				if (world.getBlockEntity(pos) instanceof MHGatheringBlockEntity gatherEntity && gatherEntity.gather()) {
+				if (world.getBlockEntity(pos) instanceof MHAbstractGatheringBlockEntity gatherEntity && gatherEntity.gather()) {
 					for (ServerPlayerEntity serverPlayer : PlayerLookup.tracking(gatherEntity))
 						MHNetwork.sendToClient(MHS2CPackets.BLOCK_BREAK, serverPlayer, PacketHelper.blockPos(pos));
 					world.removeBlock(pos, true);
 				}
-			}
-			return ActionResult.SUCCESS;
-		}
-
-		if (player.getAbilities().creativeMode) {
-			if (!world.isClient) {
-				world.setBlockState(pos, cycle(state));
 			}
 			return ActionResult.SUCCESS;
 		}
@@ -148,6 +153,20 @@ public abstract class MHGatheringBlock extends Block implements GatheringBlockEn
 		nbt.putString("type", type.asString());
 		stack.setNbt(nbt);
 		return stack;
+	}
+
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World abstractWorld, BlockState blockState, BlockEntityType<T> type) {
+		return type.supports(blockState) ? (world, pos, state, be) -> tick(be) : null;
+	}
+
+	public static void tick(BlockEntity be) {
+		MHAbstractGatheringBlockEntity gatherEntity = (MHAbstractGatheringBlockEntity) be;
+		if (gatherEntity.isShiny()) MHAbstractGatheringBlockEntity.shinyTick(gatherEntity);
+	}
+
+	public double getShinyY(Random random) {
+		return random.nextDouble() * 0.8 + 0.4d;
 	}
 
 	public static class AvailableResources {

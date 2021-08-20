@@ -13,13 +13,15 @@ import net.minecraft.util.registry.Registry;
 
 public class MHEntities {
 	public static final EntityType<MHThrownItemEntity> THROWN_ITEM = Registry.register(Registry.ENTITY_TYPE, MonHun.i("thrown_item"),
-			FabricEntityTypeBuilder.create(SpawnGroup.MISC, MHThrownItemEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f)).trackRangeChunks(4).trackedUpdateRate(10).build());
+			FabricEntityTypeBuilder.create(SpawnGroup.MISC, MHThrownItemEntity::new).dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+					.trackRangeChunks(4).trackedUpdateRate(10).build());
 
 	public static final EntityType<TempEntityRathalos> RATHALOS = Registry.register(Registry.ENTITY_TYPE, MonHun.i("rathalos"),
-			FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TempEntityRathalos::new).trackRangeChunks(10).dimensions(EntityDimensions.fixed(1f, 2f)).build());
+			FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TempEntityRathalos::new).trackRangeChunks(10)
+					.dimensions(EntityDimensions.fixed(1f, 2f)).build());
 
 
-	public static void onInitialize() {
+	public static void registerAttributes() {
 		FabricDefaultAttributeRegistry.register(RATHALOS, MHMonsterEntity.createMonsterAttributes());
 	}
 }

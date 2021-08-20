@@ -1,0 +1,814 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "white",
+            "amount": "one|two|three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/white_mushroom_one"
+        },
+        {
+          "model": "monhun:block/white_mushroom_one",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/white_mushroom_one",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/white_mushroom_one",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "white",
+            "amount": "two|three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/white_mushroom_two"
+        },
+        {
+          "model": "monhun:block/white_mushroom_two",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/white_mushroom_two",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/white_mushroom_two",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "white",
+            "amount": "three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/white_mushroom_three"
+        },
+        {
+          "model": "monhun:block/white_mushroom_three",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/white_mushroom_three",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/white_mushroom_three",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "white",
+            "amount": "four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/white_mushroom_four"
+        },
+        {
+          "model": "monhun:block/white_mushroom_four",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/white_mushroom_four",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/white_mushroom_four",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "white",
+            "amount": "five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/white_mushroom_five"
+        },
+        {
+          "model": "monhun:block/white_mushroom_five",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/white_mushroom_five",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/white_mushroom_five",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "white",
+            "amount": "six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/white_mushroom_six"
+        },
+        {
+          "model": "monhun:block/white_mushroom_six",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/white_mushroom_six",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/white_mushroom_six",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "red",
+            "amount": "one|two|three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/red_mushroom_one"
+        },
+        {
+          "model": "monhun:block/red_mushroom_one",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/red_mushroom_one",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/red_mushroom_one",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "red",
+            "amount": "two|three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/red_mushroom_two"
+        },
+        {
+          "model": "monhun:block/red_mushroom_two",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/red_mushroom_two",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/red_mushroom_two",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "red",
+            "amount": "three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/red_mushroom_three"
+        },
+        {
+          "model": "monhun:block/red_mushroom_three",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/red_mushroom_three",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/red_mushroom_three",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "red",
+            "amount": "four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/red_mushroom_four"
+        },
+        {
+          "model": "monhun:block/red_mushroom_four",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/red_mushroom_four",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/red_mushroom_four",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "red",
+            "amount": "five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/red_mushroom_five"
+        },
+        {
+          "model": "monhun:block/red_mushroom_five",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/red_mushroom_five",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/red_mushroom_five",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "red",
+            "amount": "six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/red_mushroom_six"
+        },
+        {
+          "model": "monhun:block/red_mushroom_six",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/red_mushroom_six",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/red_mushroom_six",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "blue",
+            "amount": "one|two|three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/blue_mushroom_one"
+        },
+        {
+          "model": "monhun:block/blue_mushroom_one",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/blue_mushroom_one",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/blue_mushroom_one",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "blue",
+            "amount": "two|three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/blue_mushroom_two"
+        },
+        {
+          "model": "monhun:block/blue_mushroom_two",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/blue_mushroom_two",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/blue_mushroom_two",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "blue",
+            "amount": "three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/blue_mushroom_three"
+        },
+        {
+          "model": "monhun:block/blue_mushroom_three",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/blue_mushroom_three",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/blue_mushroom_three",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "blue",
+            "amount": "four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/blue_mushroom_four"
+        },
+        {
+          "model": "monhun:block/blue_mushroom_four",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/blue_mushroom_four",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/blue_mushroom_four",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "blue",
+            "amount": "five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/blue_mushroom_five"
+        },
+        {
+          "model": "monhun:block/blue_mushroom_five",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/blue_mushroom_five",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/blue_mushroom_five",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "blue",
+            "amount": "six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/blue_mushroom_six"
+        },
+        {
+          "model": "monhun:block/blue_mushroom_six",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/blue_mushroom_six",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/blue_mushroom_six",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "black",
+            "amount": "one|two|three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/black_mushroom_one"
+        },
+        {
+          "model": "monhun:block/black_mushroom_one",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/black_mushroom_one",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/black_mushroom_one",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "black",
+            "amount": "two|three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/black_mushroom_two"
+        },
+        {
+          "model": "monhun:block/black_mushroom_two",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/black_mushroom_two",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/black_mushroom_two",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "black",
+            "amount": "three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/black_mushroom_three"
+        },
+        {
+          "model": "monhun:block/black_mushroom_three",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/black_mushroom_three",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/black_mushroom_three",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "black",
+            "amount": "four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/black_mushroom_four"
+        },
+        {
+          "model": "monhun:block/black_mushroom_four",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/black_mushroom_four",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/black_mushroom_four",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "black",
+            "amount": "five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/black_mushroom_five"
+        },
+        {
+          "model": "monhun:block/black_mushroom_five",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/black_mushroom_five",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/black_mushroom_five",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "black",
+            "amount": "six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/black_mushroom_six"
+        },
+        {
+          "model": "monhun:block/black_mushroom_six",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/black_mushroom_six",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/black_mushroom_six",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "gold",
+            "amount": "one|two|three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/gold_mushroom_one"
+        },
+        {
+          "model": "monhun:block/gold_mushroom_one",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/gold_mushroom_one",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/gold_mushroom_one",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "gold",
+            "amount": "two|three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/gold_mushroom_two"
+        },
+        {
+          "model": "monhun:block/gold_mushroom_two",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/gold_mushroom_two",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/gold_mushroom_two",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "gold",
+            "amount": "three|four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/gold_mushroom_three"
+        },
+        {
+          "model": "monhun:block/gold_mushroom_three",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/gold_mushroom_three",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/gold_mushroom_three",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "gold",
+            "amount": "four|five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/gold_mushroom_four"
+        },
+        {
+          "model": "monhun:block/gold_mushroom_four",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/gold_mushroom_four",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/gold_mushroom_four",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "gold",
+            "amount": "five|six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/gold_mushroom_five"
+        },
+        {
+          "model": "monhun:block/gold_mushroom_five",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/gold_mushroom_five",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/gold_mushroom_five",
+          "y": 270
+        }
+      ]
+    },
+    {
+      "when": {
+        "OR": [
+          {
+            "type": "gold",
+            "amount": "six"
+          }
+        ]
+      },
+      "apply": [
+        {
+          "model": "monhun:block/gold_mushroom_six"
+        },
+        {
+          "model": "monhun:block/gold_mushroom_six",
+          "y": 90
+        },
+        {
+          "model": "monhun:block/gold_mushroom_six",
+          "y": 180
+        },
+        {
+          "model": "monhun:block/gold_mushroom_six",
+          "y": 270
+        }
+      ]
+    }
+  ]
+}

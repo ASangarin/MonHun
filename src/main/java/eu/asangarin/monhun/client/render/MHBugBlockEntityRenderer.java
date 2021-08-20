@@ -1,8 +1,8 @@
 package eu.asangarin.monhun.client.render;
 
 import eu.asangarin.monhun.MonHun;
-import eu.asangarin.monhun.block.MHGatheringBlock;
-import eu.asangarin.monhun.block.entity.MHBugBlockEntity;
+import eu.asangarin.monhun.block.gather.MHGatheringBlock;
+import eu.asangarin.monhun.block.entity.gather.MHBugBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;

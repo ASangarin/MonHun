@@ -1,0 +1,28 @@
+{
+	"elements": [
+		{
+			"from": [2, 0, 5],
+			"to": [3, 2, 6],
+			"faces": {
+				"north": {"uv": [10, 14, 11, 16], "texture": "#mushroom"},
+				"east": {"uv": [10, 14, 11, 16], "texture": "#mushroom"},
+				"south": {"uv": [10, 14, 11, 16], "texture": "#mushroom"},
+				"west": {"uv": [10, 14, 11, 16], "texture": "#mushroom"},
+				"up": {"uv": [0, 0, 1, 1], "texture": "#mushroom"},
+				"down": {"uv": [12, 15, 13, 16], "texture": "#mushroom"}
+			}
+		},
+		{
+			"from": [1, 2, 4],
+			"to": [4, 3, 7],
+			"faces": {
+				"north": {"uv": [0, 11, 3, 12], "texture": "#mushroom"},
+				"east": {"uv": [0, 11, 3, 12], "texture": "#mushroom"},
+				"south": {"uv": [0, 11, 3, 12], "texture": "#mushroom"},
+				"west": {"uv": [0, 11, 3, 12], "texture": "#mushroom"},
+				"up": {"uv": [0, 8, 3, 11], "texture": "#mushroom"},
+				"down": {"uv": [3, 8, 6, 11], "texture": "#mushroom"}
+			}
+		}
+	]
+}

@@ -1,6 +1,6 @@
 package eu.asangarin.monhun.util.interfaces;
 
-import eu.asangarin.monhun.block.entity.MHGatheringBlockEntity;
+import eu.asangarin.monhun.block.entity.gather.MHAbstractGatheringBlockEntity;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -14,5 +14,5 @@ public interface GatheringBlockEntityProvider extends BlockEntityProvider {
 		return createGatheringBlockEntity(pos, state);
 	}
 
-	MHGatheringBlockEntity createGatheringBlockEntity(BlockPos pos, BlockState state);
+	MHAbstractGatheringBlockEntity createGatheringBlockEntity(BlockPos pos, BlockState state);
 }

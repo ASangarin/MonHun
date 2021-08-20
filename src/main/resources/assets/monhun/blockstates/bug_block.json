@@ -4,14 +4,6 @@
       "apply": {
         "model": "monhun:block/bug_block"
       }
-    },
-    {
-      "when": {
-        "OR": [ {"type": "white|black|red|blue|gold"}]
-      },
-      "apply": {
-        "model": "monhun:block/bug_block"
-      }
     }
   ]
 }

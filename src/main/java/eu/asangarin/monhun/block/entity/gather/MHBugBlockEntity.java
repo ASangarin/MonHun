@@ -1,4 +1,4 @@
-package eu.asangarin.monhun.block.entity;
+package eu.asangarin.monhun.block.entity.gather;
 
 import eu.asangarin.monhun.managers.MHBlocks;
 import lombok.Getter;
@@ -13,22 +13,31 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import java.util.Objects;
 import java.util.Random;
 
-public class MHBugBlockEntity extends MHGatheringBlockEntity implements IAnimatable {
+public class MHBugBlockEntity extends MHAbstractGatheringBlockEntity implements IAnimatable {
 	private static final AnimationBuilder FLY_ANIMATION = new AnimationBuilder().addAnimation("animation.flying_bug.fly", true);
 	private static final AnimationBuilder PATH_ANIMATION = new AnimationBuilder().addAnimation("animation.flying_bug.path", true);
 	private static final Random random = new Random();
+	private final AnimationFactory factory = new AnimationFactory(this);
 	private int animationStart;
 	@Getter
 	private int hurtTime, age = 0;
 	private int health = 4;
 
-	private final AnimationFactory factory = new AnimationFactory(this);
-
 	public MHBugBlockEntity(BlockPos pos, BlockState state) {
 		super(MHBlocks.BUG_BLOCK_ENTITY, pos, state);
 		animationStart = random.nextInt(60);
+	}
+
+	public static void tick(MHBugBlockEntity blockEntity) {
+		blockEntity.age++;
+		if (blockEntity.hurtTime > 0) blockEntity.hurtTime--;
+	}
+
+	protected double getShinyY() {
+		return Objects.requireNonNull(world).random.nextDouble() / 2;
 	}
 
 	@Override
@@ -54,9 +63,10 @@ public class MHBugBlockEntity extends MHGatheringBlockEntity implements IAnimata
 		hurtTime = 10;
 	}
 
-	public static void tick(MHBugBlockEntity blockEntity) {
-		blockEntity.age++;
-		if (blockEntity.hurtTime > 0) blockEntity.hurtTime--;
+	@Override
+	public void registerControllers(AnimationData data) {
+		data.addAnimationController(new AnimationController<>(this, "fly-controller", 0, this::flyAnimationPredicate));
+		data.addAnimationController(new AnimationController<>(this, "path-controller", 0, this::pathAnimationPredicate));
 	}
 
 	private <E extends IAnimatable> PlayState flyAnimationPredicate(AnimationEvent<E> event) {
@@ -69,12 +79,6 @@ public class MHBugBlockEntity extends MHGatheringBlockEntity implements IAnimata
 		if (event.animationTick < animationStart) return PlayState.STOP;
 		event.getController().setAnimation(PATH_ANIMATION);
 		return PlayState.CONTINUE;
-	}
-
-	@Override
-	public void registerControllers(AnimationData data) {
-		data.addAnimationController(new AnimationController<>(this, "fly-controller", 0, this::flyAnimationPredicate));
-		data.addAnimationController(new AnimationController<>(this, "path-controller", 0, this::pathAnimationPredicate));
 	}
 
 	@Override

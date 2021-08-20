@@ -1,8 +1,8 @@
-package eu.asangarin.monhun.block;
+package eu.asangarin.monhun.block.gather;
 
 import eu.asangarin.monhun.MonHun;
-import eu.asangarin.monhun.block.entity.MHBugBlockEntity;
-import eu.asangarin.monhun.block.entity.MHGatheringBlockEntity;
+import eu.asangarin.monhun.block.entity.gather.MHAbstractGatheringBlockEntity;
+import eu.asangarin.monhun.block.entity.gather.MHBugBlockEntity;
 import eu.asangarin.monhun.item.MHToolItem;
 import eu.asangarin.monhun.managers.MHBlocks;
 import eu.asangarin.monhun.managers.MHSounds;
@@ -33,28 +33,13 @@ import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class MHBugBlock extends MHGatheringBlock implements INoBox, IColorProvider {
-	public static final Identifier BUG_LOOTTABLE = MonHun.i("flying_bug");
+	private static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 4.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+	public static final Identifier LOOT = MonHun.i("flying_bug");
 	private static final BlockSoundGroup BUG_SOUNDS = new BlockSoundGroup(1.0F, 1.0F, MHSounds.BUTTERFLY_PLACE, MHSounds.SILENCE,
 			MHSounds.BUTTERFLY_DEATH, MHSounds.SILENCE, MHSounds.SILENCE);
 
 	public MHBugBlock() {
-		super(FabricBlockSettings.of(MHBlocks.RESOURCE).luminance(1).strength(-1.0F, 0.2F).dynamicBounds().noCollision().sounds(BUG_SOUNDS));
-	}
-
-	@Override
-	protected void tryBreak(ItemStack stack, World world, PlayerEntity player) {
-		if (stack.getItem() instanceof MHToolItem tool) tool.tryBreak(stack, world, player);
-	}
-
-	@Override
-	protected void playServerGatherEffects(World world, BlockPos pos) {
-		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_BAT_TAKEOFF, SoundCategory.PLAYERS, 0.8F,
-				world.random.nextFloat() * 0.1F + 1.1F);
-	}
-
-	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return Block.createCuboidShape(0.0D, 4.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+		super(FabricBlockSettings.of(MHBlocks.RESOURCE).strength(-1.0F, 0.2F).noCollision().sounds(BUG_SOUNDS));
 	}
 
 	@Override
@@ -68,18 +53,8 @@ public class MHBugBlock extends MHGatheringBlock implements INoBox, IColorProvid
 	}
 
 	@Override
-	protected BlockState getDefaultStateWith(BlockState state) {
-		return state;
-	}
-
-	@Override
-	protected boolean canGather(ItemStack stack) {
-		return stack.getItem() instanceof MHToolItem tool && tool.isBugNet();
-	}
-
-	@Override
-	protected Identifier getLootTableIdent() {
-		return BUG_LOOTTABLE;
+	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+		return SHAPE;
 	}
 
 	@Override
@@ -101,17 +76,45 @@ public class MHBugBlock extends MHGatheringBlock implements INoBox, IColorProvid
 	}
 
 	@Override
+	protected BlockState getDefaultStateWith(BlockState state) {
+		return state;
+	}
+
+	@Override
+	protected void tryBreak(ItemStack stack, World world, PlayerEntity player) {
+		if (stack.getItem() instanceof MHToolItem tool) tool.tryBreak(stack, world, player);
+	}
+
+	@Override
+	protected boolean canGather(ItemStack stack) {
+		return stack.getItem() instanceof MHToolItem tool && tool.isBugNet();
+	}
+
+	@Override
+	protected void playServerGatherEffects(World world, BlockPos pos) {
+		world.playSound(null, pos, SoundEvents.ENTITY_BAT_TAKEOFF, SoundCategory.PLAYERS, 0.8F, world.random.nextFloat() * 0.1F + 1.1F);
+	}
+
+	@Override
+	protected Identifier getLootTableIdent() {
+		return LOOT;
+	}
+
+	@Override
 	public int provideColor(ItemStack stack) {
 		return MHGatheringType.fromStack(stack).getColor();
 	}
 
 	@Override
-	public MHGatheringBlockEntity createGatheringBlockEntity(BlockPos pos, BlockState state) {
+	public MHAbstractGatheringBlockEntity createGatheringBlockEntity(BlockPos pos, BlockState state) {
 		return new MHBugBlockEntity(pos, state);
 	}
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World abstractWorld, BlockState blockState, BlockEntityType<T> type) {
-		return MHBlocks.BUG_BLOCK_ENTITY == type ? (world, pos, state, be) -> MHBugBlockEntity.tick((MHBugBlockEntity) be) : null;
+		return type.supports(blockState) ? (world, pos, state, be) -> {
+			MHGatheringBlock.tick(be);
+			MHBugBlockEntity.tick((MHBugBlockEntity) be);
+		} : null;
 	}
 }
