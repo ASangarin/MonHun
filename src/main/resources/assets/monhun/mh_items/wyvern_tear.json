@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.wyvern_tear",
+  "rarity": 3,
+  "texture": "monsterpart",
+  "color": "light_blue"
+}

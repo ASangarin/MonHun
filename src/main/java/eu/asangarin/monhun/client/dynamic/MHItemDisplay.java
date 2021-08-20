@@ -1,4 +1,4 @@
-package eu.asangarin.monhun.client.item;
+package eu.asangarin.monhun.client.dynamic;
 
 import eu.asangarin.monhun.util.ItemColors;
 import eu.asangarin.monhun.util.enums.MHItemTexture;
@@ -6,8 +6,8 @@ import eu.asangarin.monhun.util.enums.MHRarity;
 import lombok.Setter;
 
 @Setter
-public class MHItemResource {
-	private String translation_key = "item.monhun.resource.default", color = "0xFFFFFF", texture = "question";
+public class MHItemDisplay {
+	private String group = "resource", translation_key = "item.monhun.display.default", color = "0xFFFFFF", texture = "question";
 	private int rarity = 1;
 
 	public String getTranslationKey() {
@@ -26,11 +26,15 @@ public class MHItemResource {
 		return MHItemTexture.getFromString(texture);
 	}
 
+	public MHDisplayGroup getGroup() {
+		return MHDisplayGroup.getFromString(group);
+	}
+
 	public MHRarity getRarity() {
 		return MHRarity.getFromValue(rarity);
 	}
 
-	public MHCachedResource cached() {
-		return new MHCachedResource(this);
+	public MHCachedItemDisplay cached() {
+		return new MHCachedItemDisplay(this);
 	}
 }

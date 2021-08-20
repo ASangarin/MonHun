@@ -1,14 +1,13 @@
 package eu.asangarin.monhun.managers;
 
 import eu.asangarin.monhun.MonHun;
-import eu.asangarin.monhun.item.MHAccountItem;
 import eu.asangarin.monhun.item.MHBaseItem;
 import eu.asangarin.monhun.item.MHBinocularsItem;
 import eu.asangarin.monhun.item.MHCharmItem;
 import eu.asangarin.monhun.item.MHConsumableItem;
+import eu.asangarin.monhun.item.MHDynamicItem;
 import eu.asangarin.monhun.item.MHMushroomItem;
 import eu.asangarin.monhun.item.MHPickaxeItem;
-import eu.asangarin.monhun.item.MHResourceItem;
 import eu.asangarin.monhun.item.MHSpawnEggItem;
 import eu.asangarin.monhun.item.MHThrowableItem;
 import eu.asangarin.monhun.item.MHThrownItem;
@@ -36,7 +35,6 @@ import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.registry.Registry;
@@ -80,8 +78,8 @@ public class MHItems {
 	public static final MHBaseItem THROWN_EZ_SONIC_BOMB = new MHThrownItem(MHItemTexture.BALL, ItemColors.DARK_GREEN, (thrown, entity, owner) -> {
 	});
 
-	// MonHun Resource
-	public static final MHBaseItem RESOURCE_ITEM = new MHResourceItem();
+	// MonHun Dynamic Item
+	public static final MHBaseItem DYNAMIC_ITEM = new MHDynamicItem();
 
 	// Consumables
 	public static final MHBaseItem POTION = new MHConsumableItem(ItemColors.GREEN, MHRarity.RARE_1, 10, (stack, world, user) -> user.heal(7f));
@@ -483,7 +481,7 @@ public class MHItems {
 		public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 			ItemStack itemStack = user.getStackInHand(hand);
 			if (!world.isClient) {
-				MHMonsterData data = MHMonsterManager.getResource("rathalos");
+				MHMonsterData data = MHMonsterManager.getData("rathalos");
 				if (data != null) {
 					for (MHRank rank : MHRank.values())
 						for (ItemStack stack : data.getStats().get(rank).getDrops().allItems())
@@ -497,10 +495,6 @@ public class MHItems {
 	public static final MHBaseItem COMMENDATION_G = new MHWIPItem(MHItemTexture.TICKET, ItemColors.ORANGE, MHRarity.RARE_5, 64, MonHun.EXTRA_GROUP);
 	public static final MHBaseItem PAWPRINT_STAMP = new MHWIPItem(MHItemTexture.TICKET, ItemColors.WHITE, MHRarity.RARE_5, 64, MonHun.EXTRA_GROUP);
 	//public static final MHBaseItem PAWPRINT_TICKET = new MHWIPItem(MHItemTexture.TICKET, ItemColors.WHITE, MHRarity.RARE_8, 64, MonHun.MATERIAL_GROUP);
-
-	public static final MHBaseItem WYVERN_TEAR = new MHAccountItem(MHItemTexture.MONSTERPART, ItemColors.LIGHT_BLUE, MHRarity.RARE_3, 10, 500);
-	public static final MHBaseItem LARGE_WYVERN_TEAR = new MHAccountItem(MHItemTexture.MONSTERPART, ItemColors.LIGHT_BLUE, MHRarity.RARE_5, 10,
-			2500);
 
 	public static final MHSpawnEggItem RATHALOS_SPAWN_EGG = new MHSpawnEggItem(MHEntities.RATHALOS, 0xDF3916, 0x4A4A4A,
 			MHMonsterClass.FLYING_WYVERN);
@@ -519,13 +513,8 @@ public class MHItems {
 	}
 
 	public static ItemStack getStackOf(String id, int amount) {
-		Item item = Registry.ITEM.getOrEmpty(MonHun.i(id)).orElse(MHItems.RESOURCE_ITEM);
-		ItemStack stack = new ItemStack(item, amount);
-		if (item == MHItems.RESOURCE_ITEM) {
-			NbtCompound nbt = new NbtCompound();
-			nbt.putString("mh_resource", id.contains(":") ? id : "monhun:" + id);
-			stack.setNbt(nbt);
-		}
-		return stack;
+		Item item = Registry.ITEM.getOrEmpty(MonHun.i(id)).orElse(MHItems.DYNAMIC_ITEM);
+		if (item == MHItems.DYNAMIC_ITEM) return MHDynamicItem.withNBT(id.contains(":") ? id : "monhun:" + id);
+		return new ItemStack(item, amount);
 	}
 }

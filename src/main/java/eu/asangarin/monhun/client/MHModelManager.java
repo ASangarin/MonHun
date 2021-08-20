@@ -3,7 +3,7 @@ package eu.asangarin.monhun.client;
 import eu.asangarin.monhun.MonHun;
 import eu.asangarin.monhun.block.MHBlockItem;
 import eu.asangarin.monhun.client.model.ModelBuilder;
-import eu.asangarin.monhun.item.MHResourceItem;
+import eu.asangarin.monhun.item.MHDynamicItem;
 import eu.asangarin.monhun.managers.MHItems;
 import eu.asangarin.monhun.util.enums.MHGatheringAmount;
 import eu.asangarin.monhun.util.enums.MHGatheringType;
@@ -20,13 +20,13 @@ public class MHModelManager {
 	private static final Map<String, String> modelTypes = new HashMap<>();
 
 	public static void register() {
-		ModelBuilder resItemModel = new ModelBuilder("item/generated").addTexture("layer0", "item/question");
+		ModelBuilder dynamicItemModel = new ModelBuilder("item/generated").addTexture("layer0", "item/question");
 		for (MHItemTexture texture : MHItemTexture.values()) {
 			String key = "item/tex/" + texture.toIdentifier();
 			registerModel(key, new ModelBuilder("item/generated").addTexture("layer0", "item/" + texture.toIdentifier()));
-			resItemModel.addPredicate("texture_value", texture.getValue(), key);
+			dynamicItemModel.addPredicate("texture_value", texture.getValue(), key);
 		}
-		registerModel("item/resource_item", resItemModel);
+		registerModel("item/dynamic_item", dynamicItemModel);
 
 		for (MHMonsterClass clazz : MHMonsterClass.values())
 			registerModel("item/egg/" + clazz.toIdentifier(), new ModelBuilder("item/generated").addTexture("layer0", "item/egg/monster_egg")
@@ -74,8 +74,8 @@ public class MHModelManager {
 
 		registerInternal("item/binoculars_in_hand");
 
-		ModelPredicateProviderRegistrySpecificAccessor.callRegister(MHItems.RESOURCE_ITEM, MonHun.i("texture_value"),
-				(itemStack, clientWorld, livingEntity, ticks) -> MHResourceItem.getResource(itemStack).getTexture().getValue());
+		ModelPredicateProviderRegistrySpecificAccessor.callRegister(MHItems.DYNAMIC_ITEM, MonHun.i("texture_value"),
+				(itemStack, clientWorld, livingEntity, ticks) -> MHDynamicItem.getDisplay(itemStack).getTexture().getValue());
 		ModelPredicateProviderRegistryAccessor.callRegister(MonHun.i("gathering_type"), (itemStack, clientWorld, livingEntity, ticks) -> {
 			if (!(itemStack.getItem() instanceof MHBlockItem)) return 0f;
 			return MHGatheringType.fromStack(itemStack).getValue();

@@ -1,8 +1,8 @@
 package eu.asangarin.monhun.client;
 
 import eu.asangarin.monhun.MonHun;
-import eu.asangarin.monhun.client.item.MHItemManager;
-import eu.asangarin.monhun.client.item.MHItemResource;
+import eu.asangarin.monhun.client.dynamic.MHItemDisplay;
+import eu.asangarin.monhun.client.dynamic.MHItemDisplayManager;
 import eu.asangarin.monhun.client.render.MHBugBlockEntityRenderer;
 import eu.asangarin.monhun.client.render.MHItemModelRenderer;
 import eu.asangarin.monhun.gui.BoxScreen;
@@ -59,14 +59,14 @@ public class MonHunClient implements ClientModInitializer {
 
 			@Override
 			public void reload(ResourceManager manager) {
-				MHItemManager.clear();
+				MHItemDisplayManager.clear();
 				for (Identifier id : manager.findResources("mh_items", path -> path.endsWith(".json"))) {
 					try (InputStream stream = manager.getResource(id).getInputStream()) {
 						Reader reader = new InputStreamReader(stream, StandardCharsets.UTF_8);
-						MHItemManager.add(id.toString().replace("mh_items/", "").replace(".json", ""),
-								MonHun.GSON.fromJson(reader, MHItemResource.class).cached());
+						MHItemDisplayManager.add(id.toString().replace("mh_items/", "").replace(".json", ""),
+								MonHun.GSON.fromJson(reader, MHItemDisplay.class).cached());
 					} catch (Exception e) {
-						MonHun.log("Error occurred while loading resource json " + id.toString(), e);
+						MonHun.log("Error occurred while loading item display json " + id.toString(), e);
 					}
 				}
 			}
@@ -128,8 +128,8 @@ public class MonHunClient implements ClientModInitializer {
 	@SuppressWarnings({"unchecked"})
 	private void registerRenderers() {
 		EntityRendererRegistry.INSTANCE.register(MHEntities.THROWN_ITEM, FlyingItemEntityRenderer::new);
-		BlockEntityRendererRegistry.INSTANCE
-				.register(MHBlocks.BUG_BLOCK_ENTITY, (BlockEntityRendererFactory.Context rendererDispatcherIn) -> new MHBugBlockEntityRenderer());
+		BlockEntityRendererRegistry.INSTANCE.register(MHBlocks.BUG_BLOCK_ENTITY,
+				(BlockEntityRendererFactory.Context rendererDispatcherIn) -> new MHBugBlockEntityRenderer());
 
 		EntityRendererRegistry.INSTANCE.register(MHEntities.RATHALOS, (context) -> new TempRathalosRenderer(context, "rathalos"));
 		/*for (Field f : MHEntities.class.getDeclaredFields()) {

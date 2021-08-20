@@ -1,7 +1,7 @@
 package eu.asangarin.monhun.block;
 
 import eu.asangarin.monhun.components.MHComponents;
-import eu.asangarin.monhun.item.MHAccountItem;
+import eu.asangarin.monhun.item.MHDynamicItem;
 import eu.asangarin.monhun.util.enums.MHRarity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -54,11 +54,10 @@ public class MHBoxBlock extends Block implements Waterloggable {
 	@Override
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		ItemStack stack = player.getStackInHand(hand);
-		if(!(stack.getItem() instanceof MHAccountItem accountItem))
-			return ActionResult.PASS;
-		if(!world.isClient) {
-			MHComponents.MONEY.get(player).addPoints(accountItem.getValue(), player);
-			player.sendMessage(new LiteralText("Item Delivered! ").append(new LiteralText("(WIP)").formatted(Formatting.RED)), true);
+		if (!(stack.getItem() instanceof MHDynamicItem dynamicItem) || !dynamicItem.isAccount(stack)) return ActionResult.PASS;
+		if (!world.isClient) {
+			MHComponents.MONEY.get(player).addPoints(dynamicItem.getPointsValue(stack), player);
+			player.sendMessage(new TranslatableText("block.monhun.deliver_account").formatted(Formatting.YELLOW), true);
 			stack.decrement(1);
 		}
 		return ActionResult.SUCCESS;

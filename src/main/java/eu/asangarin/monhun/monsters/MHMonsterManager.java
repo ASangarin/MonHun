@@ -11,11 +11,11 @@ import java.util.Set;
 public class MHMonsterManager {
 	private static final Map<String, MHMonsterData> monsterData = new HashMap<>();
 
-	public static MHMonsterData getResource(Identifier key) {
+	public static MHMonsterData getData(Identifier key) {
 		return monsterData.get(key.toString());
 	}
 
-	public static MHMonsterData getResource(String key) {
+	public static MHMonsterData getData(String key) {
 		return monsterData.get("monhun:" + key);
 	}
 
@@ -23,7 +23,7 @@ public class MHMonsterManager {
 		monsterData.clear();
 	}
 
-	public static Set<String> getResourceKeys() {
+	public static Set<String> getDataKeys() {
 		return monsterData.keySet();
 	}
 

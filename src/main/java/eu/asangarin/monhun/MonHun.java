@@ -8,6 +8,8 @@ import eu.asangarin.monhun.block.gather.MHGatheringBlock;
 import eu.asangarin.monhun.block.gather.MHMushroomBlock;
 import eu.asangarin.monhun.block.gather.MHOreBlock;
 import eu.asangarin.monhun.config.MHConfig;
+import eu.asangarin.monhun.dynamic.MHItemData;
+import eu.asangarin.monhun.dynamic.MHItemDataManager;
 import eu.asangarin.monhun.effects.IPotionable;
 import eu.asangarin.monhun.managers.MHBlocks;
 import eu.asangarin.monhun.managers.MHEntities;
@@ -99,7 +101,7 @@ public class MonHun implements ModInitializer {
 			.icon(() -> new ItemStack(MHItems.AQUAGLOW_JEWEL)).build();*/
 	public static final ItemGroup BLOCK_GROUP = FabricItemGroupBuilder.create(MonHun.i("blocks"))
 			.icon(() -> new ItemStack(MHBlocks.ORE_BLOCK.asItem())).build();
-	public static final ItemGroup ACCOUNT_GROUP = FabricItemGroupBuilder.create(MonHun.i("account")).icon(() -> new ItemStack(MHItems.WYVERN_TEAR))
+	public static final ItemGroup ACCOUNT_GROUP = FabricItemGroupBuilder.create(MonHun.i("account")).icon(() -> new ItemStack(MHItems.SAP_PLANT))
 			.build();
 	public static final ItemGroup SPAWN_EGG_GROUP = FabricItemGroupBuilder.create(MonHun.i("spawn_eggs"))
 			.icon(() -> new ItemStack(MHItems.RATHALOS_SPAWN_EGG)).build();
@@ -176,7 +178,28 @@ public class MonHun implements ModInitializer {
 						MHMonsterManager.add(id.toString().replace("monster_data/", "").replace(".json", ""),
 								MonHun.GSON.fromJson(reader, MHMonsterData.class));
 					} catch (Exception e) {
-						MonHun.log("Error occurred while loading resource json " + id.toString(), e);
+						MonHun.log("Error occurred while loading monster data json " + id.toString(), e);
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
+			@Override
+			public Identifier getFabricId() {
+				return MonHun.i("mh_items");
+			}
+
+			@Override
+			public void reload(ResourceManager manager) {
+				MHItemDataManager.clear();
+				for (Identifier id : manager.findResources("mh_items", path -> path.endsWith(".json"))) {
+					try (InputStream stream = manager.getResource(id).getInputStream()) {
+						Reader reader = new InputStreamReader(stream, StandardCharsets.UTF_8);
+						MHItemDataManager.add(id.toString().replace("mh_items/", "").replace(".json", ""),
+								MonHun.GSON.fromJson(reader, MHItemData.class).cached());
+					} catch (Exception e) {
+						MonHun.log("Error occurred while loading item data json " + id.toString(), e);
 						e.printStackTrace();
 					}
 				}
