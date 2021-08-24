@@ -31,13 +31,13 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
-public class MHOreBlock extends MHGatheringBlock {
+public class MHOreBlock extends MHColorGatheringBlock {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 	public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 	public static final Identifier LOOT = MonHun.i("mining_outcrop");
 
 	public MHOreBlock() {
-		super(FabricBlockSettings.of(MHBlocks.RESOURCE).dynamicBounds().strength(12.0f).nonOpaque().sounds(BlockSoundGroup.DEEPSLATE_TILES));
+		super(FabricBlockSettings.of(MHBlocks.RESOURCE).dynamicBounds().strength(4.0f).nonOpaque().sounds(BlockSoundGroup.DEEPSLATE_TILES));
 	}
 
 	protected BlockState getDefaultStateWith(BlockState state) {

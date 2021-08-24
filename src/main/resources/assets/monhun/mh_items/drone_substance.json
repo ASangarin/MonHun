@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.drone_substance",
+  "rarity": "3",
+  "texture": "potion",
+  "color": "yellow"
+}

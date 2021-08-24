@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.monster_guts",
+  "rarity": "3",
+  "texture": "monsterpart",
+  "color": "yellow"
+}

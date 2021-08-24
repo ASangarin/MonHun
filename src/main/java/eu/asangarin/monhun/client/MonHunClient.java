@@ -24,6 +24,7 @@ import io.github.ennuil.libzoomer.api.transitions.SmoothTransitionMode;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
@@ -31,6 +32,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.resource.ResourceManager;
@@ -103,6 +105,8 @@ public class MonHunClient implements ClientModInitializer {
 							.isOf(MHItems.BINOCULARS)));
 		});
 
+		BlockRenderLayerMap.INSTANCE.putBlock(MHBlocks.TOP_PLANT_BLOCK, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(MHBlocks.BOTTOM_PLANT_BLOCK, RenderLayer.getCutout());
 		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> MHBlocks.BUG_BLOCK_ITEM.getColor(stack), MHBlocks.BUG_BLOCK_ITEM);
 		registerRenderers();
 		registerScreens();

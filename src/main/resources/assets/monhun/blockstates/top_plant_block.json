@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "type=white": {
+      "model": "monhun:block/plant_top_white"
+    },
+    "type=red": {
+      "model": "monhun:block/plant_top_red"
+    },
+    "type=blue": {
+      "model": "monhun:block/plant_top_blue"
+    },
+    "type=gold": {
+      "model": "monhun:block/plant_top_gold"
+    },
+    "type=black": {
+      "model": "monhun:block/plant_top_black"
+    }
+  }
+}

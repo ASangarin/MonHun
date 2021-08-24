@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.decayed_scale",
+  "rarity": "5",
+  "texture": "scale",
+  "color": "gray"
+}

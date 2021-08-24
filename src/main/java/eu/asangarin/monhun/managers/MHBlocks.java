@@ -8,9 +8,12 @@ import eu.asangarin.monhun.block.entity.MHItemBoxBlockEntity;
 import eu.asangarin.monhun.block.entity.MHSupplyBoxBlockEntity;
 import eu.asangarin.monhun.block.entity.gather.MHBugBlockEntity;
 import eu.asangarin.monhun.block.entity.gather.MHGatheringBlockEntity;
+import eu.asangarin.monhun.block.gather.MHBottomPlantBlock;
 import eu.asangarin.monhun.block.gather.MHBugBlock;
+import eu.asangarin.monhun.block.gather.MHHoneyBlock;
 import eu.asangarin.monhun.block.gather.MHMushroomBlock;
 import eu.asangarin.monhun.block.gather.MHOreBlock;
+import eu.asangarin.monhun.block.gather.MHTopPlantBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
@@ -35,9 +38,13 @@ public class MHBlocks {
 	public static final Block ORE_BLOCK = new MHOreBlock();
 	public static final Block BUG_BLOCK = new MHBugBlock();
 	public static final Block MUSHROOM_BLOCK = new MHMushroomBlock();
+	public static final Block HONEY_BLOCK = new MHHoneyBlock();
+	public static final Block TOP_PLANT_BLOCK = new MHTopPlantBlock(), BOTTOM_PLANT_BLOCK = new MHBottomPlantBlock();
 	public static final MHBlockItem ORE_BLOCK_ITEM = new MHBlockItem(ORE_BLOCK);
 	public static final MHBlockItem BUG_BLOCK_ITEM = new MHBlockItem(BUG_BLOCK);
 	public static final MHBlockItem MUSHROOM_BLOCK_ITEM = new MHBlockItem(MUSHROOM_BLOCK);
+	public static final MHBlockItem HONEY_BLOCK_ITEM = new MHBlockItem(HONEY_BLOCK);
+	public static final MHBlockItem PLANT_BLOCK_ITEM = new MHBlockItem(BOTTOM_PLANT_BLOCK);
 	public static BlockEntityType<MHBugBlockEntity> BUG_BLOCK_ENTITY;
 
 	public static BlockEntityType<MHGatheringBlockEntity> GATHERING_BLOCK_ENTITY;
@@ -50,6 +57,7 @@ public class MHBlocks {
 		BUG_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, MonHun.i("bug_block_entity"),
 				FabricBlockEntityTypeBuilder.create(MHBugBlockEntity::new, BUG_BLOCK).build(null));
 		GATHERING_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, MonHun.i("ore_block_entity"),
-				FabricBlockEntityTypeBuilder.create(MHGatheringBlockEntity::new, ORE_BLOCK, MUSHROOM_BLOCK).build(null));
+				FabricBlockEntityTypeBuilder.create(MHGatheringBlockEntity::new, ORE_BLOCK, MUSHROOM_BLOCK, HONEY_BLOCK, TOP_PLANT_BLOCK)
+						.build(null));
 	}
 }

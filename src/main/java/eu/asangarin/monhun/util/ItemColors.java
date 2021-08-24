@@ -18,12 +18,13 @@ public class ItemColors {
 	public static final int GRAY = 0x8C8A8C;
 	public static final int PURPLE = 0xCEA6D6;
 	public static final int PINK = 0xF8879D;
-	public static final int BROWN = 0xFECF6A;
+	public static final int BROWN = 0xC0992C;
 
 	// Unique Colors
 	public static final int LIME = 0xB5D773;
 	public static final int CYAN = 0x54EDCE;
 	public static final int DARK_GREEN = 0x508B37;
+	public static final int DEEP_RED = 0x9B0000;
 	public static final int BLACK = 0x444444;
 
 	// Monster Colors

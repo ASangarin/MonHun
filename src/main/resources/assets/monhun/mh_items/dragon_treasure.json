@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.dragon_treasure",
+  "rarity": "3",
+  "texture": "monsterpart",
+  "color": "purple"
+}

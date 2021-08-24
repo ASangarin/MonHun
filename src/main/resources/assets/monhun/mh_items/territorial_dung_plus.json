@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.territorial_dung_plus",
+  "rarity": "5",
+  "texture": "dung",
+  "color": "orange"
+}

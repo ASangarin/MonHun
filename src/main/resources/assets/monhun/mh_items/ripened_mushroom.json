@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.ripened_mushroom",
+  "rarity": "3",
+  "texture": "mushroom",
+  "color": "green"
+}

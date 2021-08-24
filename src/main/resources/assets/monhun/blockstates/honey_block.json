@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "royal=false,facing=north": {
+      "model": "monhun:block/honey_block"
+    },
+    "royal=true,facing=north": {
+      "model": "monhun:block/royal_honey_block"
+    },
+    "royal=false,facing=east": {
+      "model": "monhun:block/honey_block",
+      "y": 90
+    },
+    "royal=true,facing=east": {
+      "model": "monhun:block/royal_honey_block",
+      "y": 90
+    },
+    "royal=false,facing=south": {
+      "model": "monhun:block/honey_block",
+      "y": 180
+    },
+    "royal=true,facing=south": {
+      "model": "monhun:block/royal_honey_block",
+      "y": 180
+    },
+    "royal=false,facing=west": {
+      "model": "monhun:block/honey_block",
+      "y": 270
+    },
+    "royal=true,facing=west": {
+      "model": "monhun:block/royal_honey_block",
+      "y": 270
+    }
+  }
+}

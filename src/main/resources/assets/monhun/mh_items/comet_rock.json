@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.comet_rock",
+  "rarity": "4",
+  "texture": "ore",
+  "color": "deep_red"
+}

@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.meteor_chunk",
+  "rarity": "5",
+  "texture": "ore",
+  "color": "blue"
+}

@@ -37,12 +37,16 @@
   "block.monhun.ore_block": "Ore Gathering Spot (%s)",
   "block.monhun.bug_block": "Bug Gathering Spot (%s)",
   "block.monhun.mushroom_block": "Mushroom Gathering Spot (%s)",
+  "block.monhun.honey_block": "Honey Gathering Spot%s",
+  "block.monhun.bottom_plant_block": "Plant Gathering Spot (%s)",
 
   "block.monhun.gathering_color.white": "White",
   "block.monhun.gathering_color.red": "Red",
   "block.monhun.gathering_color.blue": "Blue",
   "block.monhun.gathering_color.gold": "Gold",
   "block.monhun.gathering_color.black": "Black",
+
+  "block.monhun.honey.royal": " (Royal)",
 
   "block.monhun.possible_resources": "Possible Outcomes:",
   "block.monhun.deliver_account": "Account Item Delivered!",

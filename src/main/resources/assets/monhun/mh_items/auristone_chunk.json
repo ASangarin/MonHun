@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.auristone_chunk",
+  "rarity": "4",
+  "texture": "ore",
+  "color": "yellow"
+}

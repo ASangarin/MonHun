@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class MHMushroomBlock extends MHGatheringBlock {
+public class MHMushroomBlock extends MHColorGatheringBlock {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
 	public static final Identifier LOOT = MonHun.i("mushroom_patch");
 	public static final EnumProperty<MHGatheringAmount> AMOUNT = EnumProperty.of("amount", MHGatheringAmount.class);

@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.unique_mushroom",
+  "rarity": "2",
+  "texture": "mushroom",
+  "color": "white"
+}

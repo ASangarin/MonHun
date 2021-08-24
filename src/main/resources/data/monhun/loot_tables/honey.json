@@ -1,0 +1,32 @@
+{
+    "pools": [{
+            "rolls": 1,
+            "entries": [{
+                    "type": "item",
+                    "name": "monhun:insect_husk",
+                    "weight": 1
+                }, {
+                    "type": "item",
+                    "name": "monhun:snakebee_larva",
+                    "weight": 2
+                }, {
+                    "type": "item",
+                    "name": "monhun:honey",
+                    "weight": 18
+                }, {
+                    "type": "monhun:dynamic_item",
+                    "name": "monhun:royal_honey",
+                    "weight": 18,
+                    "conditions": [{
+                            "condition": "block_state_property",
+                            "block": "monhun:honey_block",
+                            "properties": {
+                                "royal": true
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

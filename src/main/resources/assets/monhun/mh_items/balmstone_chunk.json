@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.balmstone_chunk",
+  "rarity": "4",
+  "texture": "ore",
+  "color": "pink"
+}

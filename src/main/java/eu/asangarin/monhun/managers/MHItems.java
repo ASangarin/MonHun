@@ -474,8 +474,8 @@ public class MHItems {
 	//public static final MHBaseItem TRUE_ARMOR_SPHERE = new MHWIPItem(MHItemTexture.SPHERE, ItemColors.LIGHT_BLUE, MHRarity.RARE_9, 64, MonHun.EXTRA_GROUP);
 	//public static final MHBaseItem DIVINE_ARMOR_SPHERE = new MHWIPItem(MHItemTexture.SPHERE, ItemColors.CYAN, MHRarity.RARE_10, 64, MonHun.EXTRA_GROUP);
 
-	public static final MHBaseItem VOUCHER = new MHWIPItem(MHItemTexture.TICKET, ItemColors.WHITE, MHRarity.RARE_4, 64, MonHun.EXTRA_GROUP);
-	public static final MHBaseItem GOURMET_VOUCHER = new MHWIPItem(MHItemTexture.TICKET, ItemColors.YELLOW, MHRarity.RARE_5, 64,
+	public static final MHBaseItem VOUCHER = new MHWIPItem(MHItemTexture.VOUCHER, ItemColors.WHITE, MHRarity.RARE_4, 64, MonHun.EXTRA_GROUP);
+	public static final MHBaseItem GOURMET_VOUCHER = new MHWIPItem(MHItemTexture.VOUCHER, ItemColors.YELLOW, MHRarity.RARE_5, 64,
 			MonHun.EXTRA_GROUP);
 	public static final MHBaseItem COMMENDATION = new MHWIPItem(MHItemTexture.TICKET, ItemColors.ORANGE, MHRarity.RARE_4, 64, MonHun.EXTRA_GROUP) {
 		public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
@@ -507,9 +507,13 @@ public class MHItems {
 				instance.removeModifier(MHItems.hpAttUUID);
 				instance.addPersistentModifier(
 						new EntityAttributeModifier(MHItems.hpAttUUID, "monhun_maxhealth", 8, EntityAttributeModifier.Operation.ADDITION));
+				user.heal(4);
 			}
-		} else instance.addPersistentModifier(
-				new EntityAttributeModifier(MHItems.hpAttUUID, "monhun_maxhealth", value, EntityAttributeModifier.Operation.ADDITION));
+		} else {
+			instance.addPersistentModifier(
+					new EntityAttributeModifier(MHItems.hpAttUUID, "monhun_maxhealth", value, EntityAttributeModifier.Operation.ADDITION));
+			user.heal(4);
+		}
 	}
 
 	public static ItemStack getStackOf(String id, int amount) {

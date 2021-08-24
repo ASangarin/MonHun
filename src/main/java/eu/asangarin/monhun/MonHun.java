@@ -4,9 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import eu.asangarin.monhun.block.MHBlockItem;
 import eu.asangarin.monhun.block.gather.MHBugBlock;
+import eu.asangarin.monhun.block.gather.MHColorGatheringBlock;
 import eu.asangarin.monhun.block.gather.MHGatheringBlock;
+import eu.asangarin.monhun.block.gather.MHHoneyBlock;
 import eu.asangarin.monhun.block.gather.MHMushroomBlock;
 import eu.asangarin.monhun.block.gather.MHOreBlock;
+import eu.asangarin.monhun.block.gather.MHTopPlantBlock;
+import eu.asangarin.monhun.client.dynamic.MHItemDisplayManager;
 import eu.asangarin.monhun.config.MHConfig;
 import eu.asangarin.monhun.dynamic.MHItemData;
 import eu.asangarin.monhun.dynamic.MHItemDataManager;
@@ -25,6 +29,7 @@ import eu.asangarin.monhun.mixin.loot.MHLootTableAccessor;
 import eu.asangarin.monhun.monsters.MHMonsterManager;
 import eu.asangarin.monhun.monsters.data.MHMonsterData;
 import eu.asangarin.monhun.network.MHNetwork;
+import eu.asangarin.monhun.util.DynamicItemEntry;
 import eu.asangarin.monhun.util.MHMonsterDataDeserializer;
 import eu.asangarin.monhun.util.RegistryHelper;
 import eu.asangarin.monhun.util.enums.MHGatheringType;
@@ -39,6 +44,7 @@ import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
+import net.fabricmc.fabric.impl.loot.table.LootEntryTypeRegistryImpl;
 import net.minecraft.block.Block;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
@@ -59,6 +65,7 @@ import net.minecraft.resource.ResourceType;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
@@ -73,6 +80,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MonHun implements ModInitializer {
 	public static final Gson GSON = new GsonBuilder().registerTypeAdapter(MHMonsterData.class, new MHMonsterDataDeserializer()).setPrettyPrinting()
@@ -136,6 +145,8 @@ public class MonHun implements ModInitializer {
 		MHParticles.registerFactories();
 
 		MHNetwork.onServerInitialize();
+
+		LootEntryTypeRegistryImpl.INSTANCE.register(MonHun.i("dynamic_item"), new DynamicItemEntry.Serializer());
 
 		registerCallbacks();
 		ServerTickEvents.END_SERVER_TICK.register(server -> {
@@ -209,6 +220,10 @@ public class MonHun implements ModInitializer {
 			if (id.equals(MHOreBlock.LOOT)) addType(MHOreBlock.class, table, MHBlocks.ORE_BLOCK);
 			if (id.equals(MHBugBlock.LOOT)) addType(MHBugBlock.class, table, MHBlocks.BUG_BLOCK);
 			if (id.equals(MHMushroomBlock.LOOT)) addType(MHMushroomBlock.class, table, MHBlocks.MUSHROOM_BLOCK);
+			if (id.equals(MHHoneyBlock.LOOT))
+				addType(MHHoneyBlock.class, table, str -> MHBlocks.HONEY_BLOCK.getDefaultState().with(MHHoneyBlock.ROYAL, str.equals("royal")),
+						List.of("normal", "royal"));
+			if (id.equals(MHTopPlantBlock.LOOT)) addType(MHTopPlantBlock.class, table, MHBlocks.TOP_PLANT_BLOCK);
 		});
 	}
 
@@ -221,37 +236,57 @@ public class MonHun implements ModInitializer {
 	}
 
 	private void addType(Class<? extends MHGatheringBlock> clazz, FabricLootSupplierBuilder table, Block block) {
+		addType(clazz, table, string -> block.getDefaultState().with(MHColorGatheringBlock.GATHERING_TYPE, MHGatheringType.fromString(string)),
+				Stream.of(MHGatheringType.values()).map(MHGatheringType::asString).collect(Collectors.toList()));
+	}
+
+	private void addType(Class<? extends MHGatheringBlock> clazz, FabricLootSupplierBuilder table, IBlockStateProvider stateProvider, List<String> possibilities) {
 		if (!MHGatheringBlock.AVAILABLE_RESOURCES.containsKey(clazz))
 			MHGatheringBlock.AVAILABLE_RESOURCES.put(clazz, new MHGatheringBlock.AvailableResources());
 		MHGatheringBlock.AVAILABLE_RESOURCES.get(clazz).clear();
-		Map<MHGatheringType, List<Text>> available = getItemsForOreType(table,
-				type -> block.getDefaultState().with(MHGatheringBlock.GATHERING_TYPE, type));
+		Map<String, List<Text>> available = getItems(table, stateProvider, possibilities);
 		MHGatheringBlock.AVAILABLE_RESOURCES.get(clazz).putAll(available);
 	}
 
-	private Map<MHGatheringType, List<Text>> getItemsForOreType(FabricLootSupplierBuilder table, IBlockStateProvider stateProvider) {
-		Map<MHGatheringType, List<Text>> availables = new HashMap<>();
+	private Map<String, List<Text>> getItems(FabricLootSupplierBuilder table, IBlockStateProvider stateProvider, List<String> possibilities) {
+		Map<String, List<Text>> availables = new HashMap<>();
 		LootTable lootTable = table.build();
 		final List<MHItemEntryAccessor> entries = new ArrayList<>();
+		final List<DynamicItemEntry> dynamicEntries = new ArrayList<>();
 		for (LootPool pool : ((MHLootTableAccessor) lootTable).getPools()) {
 			for (LootPoolEntry entry : ((MHLootPoolAccessor) pool).getEntries()) {
 				if (entry instanceof ItemEntry) entries.add((MHItemEntryAccessor) entry);
+				if (entry instanceof DynamicItemEntry) dynamicEntries.add((DynamicItemEntry) entry);
 			}
 		}
 
-		for (MHGatheringType type : MHGatheringType.values()) {
+		for (String s : possibilities) {
 			final List<Text> itemNames = new ArrayList<>();
 
 			for (MHItemEntryAccessor entry : entries) {
+				boolean test = true;
 				for (LootCondition condition : ((MHLootPoolEntryAccessor) entry).getConditions()) {
-					if (condition instanceof BlockStatePropertyLootCondition stateCondition && ((MHBlockStatePropertyLootConditionAccessor) stateCondition).getProperties()
-							.test(stateProvider.provide(type))) {
-						itemNames.add(entry.getItem().getName());
+					if (condition instanceof BlockStatePropertyLootCondition stateCondition && !((MHBlockStatePropertyLootConditionAccessor) stateCondition).getProperties()
+							.test(stateProvider.provide(s))) {
+						test = false;
+						break;
 					}
 				}
+				if (test) itemNames.add(entry.getItem().getName());
+			}
+			for (DynamicItemEntry entry : dynamicEntries) {
+				boolean test = true;
+				for (LootCondition condition : ((MHLootPoolEntryAccessor) entry).getConditions()) {
+					if (condition instanceof BlockStatePropertyLootCondition stateCondition && !((MHBlockStatePropertyLootConditionAccessor) stateCondition).getProperties()
+							.test(stateProvider.provide(s))) {
+						test = false;
+						break;
+					}
+				}
+				if (test) itemNames.add(new TranslatableText(MHItemDisplayManager.getDisplay(entry.getItem()).getTranslationKey()));
 			}
 
-			availables.put(type, itemNames);
+			availables.put(s, itemNames);
 		}
 
 		return availables;

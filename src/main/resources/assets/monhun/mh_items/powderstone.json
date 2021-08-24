@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.powderstone",
+  "rarity": "5",
+  "texture": "ore",
+  "color": "red"
+}

@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.volatile_coal",
+  "rarity": "4",
+  "texture": "ore",
+  "color": "red"
+}

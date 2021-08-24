@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.great_shroom",
+  "rarity": "3",
+  "texture": "mushroom",
+  "color": "orange"
+}

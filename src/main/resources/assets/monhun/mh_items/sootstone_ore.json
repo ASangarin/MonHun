@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.sootstone_ore",
+  "rarity": "5",
+  "texture": "ore",
+  "color": "gray"
+}

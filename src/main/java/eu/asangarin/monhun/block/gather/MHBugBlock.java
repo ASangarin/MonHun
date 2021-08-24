@@ -32,7 +32,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-public class MHBugBlock extends MHGatheringBlock implements INoBox, IColorProvider {
+public class MHBugBlock extends MHColorGatheringBlock implements INoBox, IColorProvider {
 	private static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 4.0D, 0.0D, 16.0D, 12.0D, 16.0D);
 	public static final Identifier LOOT = MonHun.i("flying_bug");
 	private static final BlockSoundGroup BUG_SOUNDS = new BlockSoundGroup(1.0F, 1.0F, MHSounds.BUTTERFLY_PLACE, MHSounds.SILENCE,

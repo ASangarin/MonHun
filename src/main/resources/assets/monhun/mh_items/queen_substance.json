@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.queen_substance",
+  "rarity": "5",
+  "texture": "potion",
+  "color": "yellow"
+}

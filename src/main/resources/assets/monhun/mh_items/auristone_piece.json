@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.auristone_piece",
+  "rarity": "3",
+  "texture": "ore",
+  "color": "yellow"
+}

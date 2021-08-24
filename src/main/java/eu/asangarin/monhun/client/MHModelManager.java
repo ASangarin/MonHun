@@ -4,6 +4,7 @@ import eu.asangarin.monhun.MonHun;
 import eu.asangarin.monhun.block.MHBlockItem;
 import eu.asangarin.monhun.client.model.ModelBuilder;
 import eu.asangarin.monhun.item.MHDynamicItem;
+import eu.asangarin.monhun.managers.MHBlocks;
 import eu.asangarin.monhun.managers.MHItems;
 import eu.asangarin.monhun.util.enums.MHGatheringAmount;
 import eu.asangarin.monhun.util.enums.MHGatheringType;
@@ -12,6 +13,7 @@ import eu.asangarin.monhun.util.enums.MHMonsterClass;
 import eu.asangarin.monhun.util.enums.MHWeaponType;
 import net.fabricmc.fabric.mixin.object.builder.ModelPredicateProviderRegistryAccessor;
 import net.fabricmc.fabric.mixin.object.builder.ModelPredicateProviderRegistrySpecificAccessor;
+import net.minecraft.nbt.NbtCompound;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,19 +41,19 @@ public class MHModelManager {
 		}
 
 		ModelBuilder oreItemModel = new ModelBuilder("monhun:block/ore_white");
+		ModelBuilder mushroomItemModel = new ModelBuilder("monhun:block/white_mushroom_one");
+		ModelBuilder plantItemModel = new ModelBuilder("monhun:item/plant_block_item");
 		for (MHGatheringType type : MHGatheringType.values()) {
 			registerOre(type);
 			oreItemModel.addPredicate("gathering_type", type.getValue(), "block/ore_" + type.asString());
-		}
-		registerModel("item/ore_block", oreItemModel);
-		registerInternal("block/ore_model");
-
-		ModelBuilder mushroomItemModel = new ModelBuilder("monhun:block/white_mushroom_one");
-		for (MHGatheringType type : MHGatheringType.values()) {
 			for (MHGatheringAmount amount : MHGatheringAmount.values())
 				registerMushroom(type, amount);
 			mushroomItemModel.addPredicate("gathering_type", type.getValue(), "block/" + type.asString() + "_mushroom_one");
+			registerPlant(type);
+			plantItemModel.addPredicate("gathering_type", type.getValue(), "block/plant_top_" + type.asString());
 		}
+		registerModel("item/ore_block", oreItemModel);
+		registerInternal("block/ore_model");
 		registerModel("item/mushroom_block", mushroomItemModel);
 		registerInternal("block/mushroom/one");
 		registerInternal("block/mushroom/two");
@@ -59,6 +61,14 @@ public class MHModelManager {
 		registerInternal("block/mushroom/four");
 		registerInternal("block/mushroom/five");
 		registerInternal("block/mushroom/six");
+		registerModel("block/plant_bottom", new ModelBuilder("minecraft:block/tinted_cross").addTexture("cross", "block/plant_bottom"));
+		registerModel("item/plant_block", plantItemModel);
+		registerInternal("item/plant_block_item");
+
+		registerModel("item/royal_honey_block", new ModelBuilder("monhun:item/honey_block").addTexture("honey", "block/royal_honey_block"));
+		registerModel("block/royal_honey_block", new ModelBuilder("monhun:block/honey_block").addTexture("honey", "block/royal_honey_block"));
+		registerInternal("item/honey_block");
+		registerInternal("block/honey_block");
 
 		registerModel("item/bug_block", new ModelBuilder("item/generated").addTexture("layer0", "item/butterfly"));
 		registerInternal("block/bug_block");
@@ -80,6 +90,12 @@ public class MHModelManager {
 			if (!(itemStack.getItem() instanceof MHBlockItem)) return 0f;
 			return MHGatheringType.fromStack(itemStack).getValue();
 		});
+		ModelPredicateProviderRegistrySpecificAccessor.callRegister(MHBlocks.HONEY_BLOCK_ITEM, MonHun.i("royal"),
+				(itemStack, clientWorld, livingEntity, ticks) -> {
+					NbtCompound nbt = itemStack.getNbt();
+					if (nbt == null || !nbt.contains("royal")) return 0.0f;
+					return nbt.getBoolean("royal") ? 1.0f : 0.0f;
+				});
 	}
 
 	public static String getItemJson(String item) {
@@ -110,6 +126,11 @@ public class MHModelManager {
 		registerModel("block/ore_" + type.asString(),
 				new ModelBuilder("monhun:block/ore_model").addTexture("crystal", "block/ore_" + type.asString())
 						.addTexture("particle", "block/ore_" + type.asString()));
+	}
+
+	private static void registerPlant(MHGatheringType type) {
+		registerModel("block/plant_top_" + type.asString(),
+				new ModelBuilder("minecraft:block/tinted_cross").addTexture("cross", "block/plant_top_" + type.asString()));
 	}
 
 	private static void registerMushroom(MHGatheringType type, MHGatheringAmount amount) {

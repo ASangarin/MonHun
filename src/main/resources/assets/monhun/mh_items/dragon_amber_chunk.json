@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.dragon_amber_chunk",
+  "rarity": "4",
+  "texture": "ore",
+  "color": "orange"
+}

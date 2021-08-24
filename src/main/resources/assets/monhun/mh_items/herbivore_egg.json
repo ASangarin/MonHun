@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.herbivore_egg",
+  "rarity": "5",
+  "texture": "egg",
+  "color": "green"
+}

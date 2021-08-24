@@ -1,8 +1,8 @@
 package eu.asangarin.monhun.client.render;
 
 import eu.asangarin.monhun.MonHun;
-import eu.asangarin.monhun.block.gather.MHGatheringBlock;
 import eu.asangarin.monhun.block.entity.gather.MHBugBlockEntity;
+import eu.asangarin.monhun.block.gather.MHColorGatheringBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
@@ -61,7 +61,7 @@ public class MHBugBlockEntityRenderer extends GeoBlockRenderer<MHBugBlockEntity>
 	}
 
 	private Identifier getBugTexture(BlockState state) {
-		return switch (state.get(MHGatheringBlock.GATHERING_TYPE)) {
+		return switch (state.get(MHColorGatheringBlock.GATHERING_TYPE)) {
 			case WHITE -> WHITE_TEXTURE;
 			case RED -> RED_TEXTURE;
 			case BLUE -> BLUE_TEXTURE;

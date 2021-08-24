@@ -1,0 +1,7 @@
+{
+  "group": "account",
+  "translation_key": "account_item.eternal_fossil",
+  "rarity": "5",
+  "texture": "ore",
+  "color": "gray"
+}
