@@ -65,6 +65,9 @@ public class MHModelManager {
 		registerModel("item/plant_block", plantItemModel);
 		registerInternal("item/plant_block_item");
 
+		registerInternal("item/spider_web_block");
+		registerParental("item/spider_web_block", "item/cobweb");
+
 		registerModel("item/royal_honey_block", new ModelBuilder("monhun:item/honey_block").addTexture("honey", "block/royal_honey_block"));
 		registerModel("block/royal_honey_block", new ModelBuilder("monhun:block/honey_block").addTexture("honey", "block/royal_honey_block"));
 		registerInternal("item/honey_block");

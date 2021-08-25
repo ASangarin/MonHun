@@ -1,4 +1,5 @@
 {
+	"parent": "block/block",
 	"textures": {
 		"spider_web": "monhun:block/spider_web",
 		"log": "block/dark_oak_log",
@@ -102,7 +103,7 @@
 			"rotation": {"angle": 22.5, "axis": "z", "origin": [8.63764, 20.30531, 8]},
 			"faces": {
 				"north": {"uv": [16, 0, 0, 16], "texture": "#spider_web"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#spider_web"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#spider_web"}
 			}
 		}
 	]

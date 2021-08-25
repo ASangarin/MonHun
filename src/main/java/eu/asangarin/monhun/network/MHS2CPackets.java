@@ -15,12 +15,14 @@ public enum MHS2CPackets {
 		BlockPos pos = buf.readBlockPos();
 		if (client.world == null) return;
 		BlockState state = client.world.getBlockState(pos);
-		if (!state.isAir()) {
-			BlockSoundGroup blockSoundGroup = state.getSoundGroup();
-			client.world.playSound(pos, blockSoundGroup.getBreakSound(), SoundCategory.BLOCKS, (blockSoundGroup.getVolume() + 1.0F) / 2.0F,
-					blockSoundGroup.getPitch() * 0.8F, false);
-		}
-		client.world.addBlockBreakParticles(pos, state);
+		BlockSoundGroup blockSoundGroup = state.getSoundGroup();
+		client.execute(() -> {
+			if (!state.isAir()) {
+				client.world.playSound(pos, blockSoundGroup.getBreakSound(), SoundCategory.BLOCKS, (blockSoundGroup.getVolume() + 1.0F) / 2.0F,
+						blockSoundGroup.getPitch() * 0.8F, false);
+			}
+			client.world.addBlockBreakParticles(pos, state);
+		});
 	}), SOUND("sound", (client, handler, buf, sender) -> {
 	});
 

@@ -1,0 +1,25 @@
+{
+    "pools": [{
+            "rolls": 1,
+            "entries": [{
+                    "type": "item",
+                    "name": "monhun:insect_husk",
+                    "weight": 1
+                }, {
+                    "type": "item",
+                    "name": "monhun:spider_web",
+                    "weight": 3,
+                    "functions": [{
+                            "function": "set_count",
+                            "count": 2
+                        }
+                    ]
+                }, {
+                    "type": "item",
+                    "name": "monhun:spider_web",
+                    "weight": 16
+                }
+            ]
+        }
+    ]
+}

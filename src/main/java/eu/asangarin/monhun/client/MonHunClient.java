@@ -107,6 +107,7 @@ public class MonHunClient implements ClientModInitializer {
 
 		BlockRenderLayerMap.INSTANCE.putBlock(MHBlocks.TOP_PLANT_BLOCK, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(MHBlocks.BOTTOM_PLANT_BLOCK, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(MHBlocks.SPIDER_WEB_BLOCK, RenderLayer.getCutout());
 		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> MHBlocks.BUG_BLOCK_ITEM.getColor(stack), MHBlocks.BUG_BLOCK_ITEM);
 		registerRenderers();
 		registerScreens();

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "monhun:block/spider_web_block"
+    },
+    "facing=east": {
+      "model": "monhun:block/spider_web_block",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "monhun:block/spider_web_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "monhun:block/spider_web_block",
+      "y": 270
+    }
+  }
+}
