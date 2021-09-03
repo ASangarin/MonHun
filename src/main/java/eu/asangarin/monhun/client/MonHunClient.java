@@ -3,9 +3,11 @@ package eu.asangarin.monhun.client;
 import eu.asangarin.monhun.MonHun;
 import eu.asangarin.monhun.client.dynamic.MHItemDisplay;
 import eu.asangarin.monhun.client.dynamic.MHItemDisplayManager;
+import eu.asangarin.monhun.client.gui.BoxScreen;
+import eu.asangarin.monhun.client.gui.MHButtonListScreen;
 import eu.asangarin.monhun.client.render.MHBugBlockEntityRenderer;
 import eu.asangarin.monhun.client.render.MHItemModelRenderer;
-import eu.asangarin.monhun.gui.BoxScreen;
+import eu.asangarin.monhun.client.render.entity.MHNPCEntityRenderer;
 import eu.asangarin.monhun.item.MHBaseItem;
 import eu.asangarin.monhun.item.MHBaseModelItem;
 import eu.asangarin.monhun.item.MHSpawnEggItem;
@@ -116,6 +118,7 @@ public class MonHunClient implements ClientModInitializer {
 	private void registerScreens() {
 		ScreenRegistry.register(MHScreens.SUPPLY_BOX_SCREEN_HANDLER, BoxScreen::new);
 		ScreenRegistry.register(MHScreens.ITEM_BOX_SCREEN_HANDLER, BoxScreen::new);
+		ScreenRegistry.register(MHScreens.BUTTON_LIST_SCREEN, MHButtonListScreen::new);
 	}
 
 	private void registerClientItem(MHBaseItem item, String id) {
@@ -126,7 +129,7 @@ public class MonHunClient implements ClientModInitializer {
 				GeoItemRenderer.registerItemRenderer(item, new MHItemModelRenderer());
 				return;
 			}
-			MHModelManager.registerTexture("item/" + id, item.getTexture());
+			if (item.isDynamicTexture()) MHModelManager.registerTexture("item/" + id, item.getTexture());
 		}
 	}
 
@@ -137,6 +140,8 @@ public class MonHunClient implements ClientModInitializer {
 				(BlockEntityRendererFactory.Context rendererDispatcherIn) -> new MHBugBlockEntityRenderer());
 
 		EntityRendererRegistry.INSTANCE.register(MHEntities.RATHALOS, (context) -> new TempRathalosRenderer(context, "rathalos"));
+		EntityRendererRegistry.INSTANCE.register(MHEntities.BLACKSMITH, (context) -> new MHNPCEntityRenderer(context, false));
+		EntityRendererRegistry.INSTANCE.register(MHEntities.PROVISIONER, (context) -> new MHNPCEntityRenderer(context, true));
 		/*for (Field f : MHEntities.class.getDeclaredFields()) {
 			try {
 				Class<?> entityClass = ((ParameterizedType)f.getGenericType()).getActualTypeArguments()[0].getClass();

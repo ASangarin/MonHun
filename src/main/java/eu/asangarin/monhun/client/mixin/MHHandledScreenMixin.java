@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(HandledScreen.class)
-public class MHHandledScreen {
+public class MHHandledScreenMixin {
 	@Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/ingame/HandledScreen;drawSlotHighlight(Lnet/minecraft/client/util/math/MatrixStack;III)V"))
 	private void drawSlotHighlight(MatrixStack matrices, int x, int y, int z) {
 		if (MonHun.getConfig().getClient().getRendering().isUseCustomSlotHighlight()

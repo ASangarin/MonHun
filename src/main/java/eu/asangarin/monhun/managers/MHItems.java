@@ -6,6 +6,7 @@ import eu.asangarin.monhun.item.MHBinocularsItem;
 import eu.asangarin.monhun.item.MHCharmItem;
 import eu.asangarin.monhun.item.MHConsumableItem;
 import eu.asangarin.monhun.item.MHDynamicItem;
+import eu.asangarin.monhun.item.MHJokeWeaponItem;
 import eu.asangarin.monhun.item.MHMushroomItem;
 import eu.asangarin.monhun.item.MHPickaxeItem;
 import eu.asangarin.monhun.item.MHSpawnEggItem;
@@ -56,6 +57,9 @@ public class MHItems {
 	public static final MHBaseItem DUMMY_LEGGINGS = new MHBaseItem(MHItemTexture.LEGGINGS);
 	public static final MHBaseItem DUMMY_TALISMAN = new MHBaseItem(MHItemTexture.TALISMAN);
 	public static final MHBaseItem DUMMY_DECORATION = new MHBaseItem(MHItemTexture.JEWEL);
+
+	// Uniques
+	public static final MHBaseItem LIL_HAMMER = new MHJokeWeaponItem();
 
 	public static final MHBaseItem THROWN_STONE = new MHThrownItem(MHItemTexture.THROWN, ItemColors.GRAY,
 			(thrown, entity, owner) -> entity.damage(DamageSource.thrownProjectile(thrown, owner), 1));

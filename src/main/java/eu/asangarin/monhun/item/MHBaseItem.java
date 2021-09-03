@@ -10,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -24,23 +23,36 @@ public class MHBaseItem extends Item {
 	private final int color;
 	@Getter
 	private final MHItemTexture texture;
+	@Getter
+	private final boolean dynamicTexture;
 
-	public MHBaseItem(MHItemTexture texture, int color, MHRarity rarity, int maxCount, ItemGroup group) {
+
+	public MHBaseItem(MHItemTexture texture, int color, MHRarity rarity, int maxCount, ItemGroup group, boolean dynamicTexture) {
 		super(new FabricItemSettings().maxCount(maxCount).group(group));
 		this.rarity = rarity;
 		this.color = color;
 		this.texture = texture;
+		this.dynamicTexture = dynamicTexture;
 	}
 
-	public MHBaseItem(MHItemTexture texture, int color) {
+	public MHBaseItem(MHItemTexture texture, int color, MHRarity rarity, int maxCount, ItemGroup group) {
+		this(texture, color, rarity, maxCount, group, true);
+	}
+
+	public MHBaseItem(MHItemTexture texture, int color, boolean dynamicTexture) {
 		super(new FabricItemSettings().maxCount(1));
 		this.rarity = MHRarity.RARE_0;
 		this.color = color;
 		this.texture = texture;
+		this.dynamicTexture = dynamicTexture;
+	}
+
+	public MHBaseItem(MHItemTexture texture, int color) {
+		this(texture, color, true);
 	}
 
 	public MHBaseItem(MHItemTexture texture) {
-		this(texture, ItemColors.WHITE);
+		this(texture, ItemColors.WHITE, true);
 	}
 
 	@Override

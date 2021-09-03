@@ -46,7 +46,7 @@ import java.util.Collection;
 import java.util.Random;
 
 @Mixin(InGameHud.class)
-public abstract class MHInGameHud extends DrawableHelper {
+public abstract class MHInGameHudMixin extends DrawableHelper {
 	private static final Identifier MH_ICONS_TEXTURE = MonHun.i("textures/gui/mhicons.png");
 
 	private float heatTicks = 0;
@@ -87,8 +87,9 @@ public abstract class MHInGameHud extends DrawableHelper {
 	@Inject(method = "renderHealthBar", at = @At("HEAD"), cancellable = true)
 	private void drawFireHearts(MatrixStack matrices, PlayerEntity player, int x, int y, int lines, int regeneratingHeartIndex, float maxHealth, int lastHealth, int health, int absorption, boolean blinking, CallbackInfo ci) {
 		RenderSystem.setShaderTexture(0, GUI_ICONS_TEXTURE);
-		if (!player.hasStatusEffect(StatusEffects.POISON) && !player.hasStatusEffect(StatusEffects.WITHER) && !player.isFreezing() && player.world
-				.getDimension().isUltrawarm() && !player.hasStatusEffect(MHStatusEffects.COOL_DRINK)) {
+		if (!player.hasStatusEffect(StatusEffects.POISON) && !player.hasStatusEffect(
+				StatusEffects.WITHER) && !player.isFreezing() && player.world.getDimension().isUltrawarm() && !player.hasStatusEffect(
+				MHStatusEffects.COOL_DRINK)) {
 			if (heatTicks < 1.0f) heatTicks += 0.01f;
 			int i = 9 * (player.world.getLevelProperties().isHardcore() ? 5 : 0);
 			int hardcore = 9 * (player.world.getLevelProperties().isHardcore() ? 1 : 0);
@@ -237,6 +238,7 @@ public abstract class MHInGameHud extends DrawableHelper {
 	@Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
 	private void renderCrosshair(MatrixStack matrices, CallbackInfo ci) {
 		PlayerEntity player = this.getCameraPlayer();
+		if (player == null) return;
 		if (player.isUsingItem() && player.getActiveItem().isOf(MHItems.BINOCULARS)) {
 			if (player.world != null) {
 				HitResult result = updateRayCast(MinecraftClient.getInstance().getTickDelta());
@@ -281,6 +283,7 @@ public abstract class MHInGameHud extends DrawableHelper {
 
 	@Inject(method = "render", at = @At("TAIL"))
 	private void renderZenny(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+		if (client.options.hudHidden) return;
 		ZennyRenderType renderType = MonHun.getConfig().getClient().getRendering().getRenderZennyAndPoints();
 		if (renderType == ZennyRenderType.NEVER) return;
 		PlayerEntity player = getCameraPlayer();
@@ -296,8 +299,7 @@ public abstract class MHInGameHud extends DrawableHelper {
 		Collection<StatusEffectInstance> collection = player.getStatusEffects();
 		if (collection.stream().anyMatch(StatusEffectInstance::shouldShowIcon)) {
 			yMod = 21;
-			if(collection.stream().anyMatch(effect -> effect.shouldShowIcon() && !effect.getEffectType().isBeneficial()))
-				yMod += 26;
+			if (collection.stream().anyMatch(effect -> effect.shouldShowIcon() && !effect.getEffectType().isBeneficial())) yMod += 26;
 		}
 
 		this.drawTexture(matrices, scaledWidth - 90, 22 + yMod, 168, 0, 88, 14);
@@ -332,10 +334,9 @@ public abstract class MHInGameHud extends DrawableHelper {
 				Vec3d vec3d2 = entity.getRotationVec(1.0F);
 				Vec3d vec3d3 = vec3d.add(vec3d2.x * d, vec3d2.y * d, vec3d2.z * d);
 				Box box = entity.getBoundingBox().stretch(vec3d2.multiply(d)).expand(1.0D, 1.0D, 1.0D);
-				EntityHitResult entityHitResult = ProjectileUtil
-						.raycast(entity, vec3d, vec3d3, box, (entityx) -> !entityx.isSpectator() && entityx.collides(), e);
-				if (entityHitResult != null)
-					hitResult = entityHitResult;
+				EntityHitResult entityHitResult = ProjectileUtil.raycast(entity, vec3d, vec3d3, box,
+						(entityx) -> !entityx.isSpectator() && entityx.collides(), e);
+				if (entityHitResult != null) hitResult = entityHitResult;
 			}
 		}
 

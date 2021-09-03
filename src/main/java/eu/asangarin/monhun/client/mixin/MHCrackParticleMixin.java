@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(CrackParticle.class)
-public class MHCrackParticle {
+public class MHCrackParticleMixin {
 	@Inject(method = "<init>(Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/item/ItemStack;)V", at = @At("TAIL"))
 	private void injected(ClientWorld world, double x, double y, double z, ItemStack stack, CallbackInfo ci) {
 		ItemColorProvider colorProvider = ColorProviderRegistry.ITEM.get(stack.getItem());

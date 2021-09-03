@@ -4,8 +4,8 @@
   "package": "eu.asangarin.monhun.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MHItemStack",
-    "MHPlayerInventory",
+    "MHItemStackMixin",
+    "MHPlayerInventoryMixin",
     "loot.MHBlockStatePropertyLootConditionAccessor",
     "loot.MHItemEntryAccessor",
     "loot.MHLootPoolAccessor",

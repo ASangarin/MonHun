@@ -22,13 +22,15 @@ public class MHModelManager {
 	private static final Map<String, String> modelTypes = new HashMap<>();
 
 	public static void register() {
-		ModelBuilder dynamicItemModel = new ModelBuilder("item/generated").addTexture("layer0", "item/question");
+		ModelBuilder dynamicItemModel = new ModelBuilder("item/generated").addTexture("layer0", "item/dynamic/question");
 		for (MHItemTexture texture : MHItemTexture.values()) {
 			String key = "item/tex/" + texture.toIdentifier();
-			registerModel(key, new ModelBuilder("item/generated").addTexture("layer0", "item/" + texture.toIdentifier()));
+			registerModel(key, new ModelBuilder("item/generated").addTexture("layer0", "item/dynamic/" + texture.toIdentifier()));
 			dynamicItemModel.addPredicate("texture_value", texture.getValue(), key);
 		}
 		registerModel("item/dynamic_item", dynamicItemModel);
+
+		registerInternal("item/lil_hammer");
 
 		for (MHMonsterClass clazz : MHMonsterClass.values())
 			registerModel("item/egg/" + clazz.toIdentifier(), new ModelBuilder("item/generated").addTexture("layer0", "item/egg/monster_egg")
@@ -37,7 +39,7 @@ public class MHModelManager {
 		for (MHWeaponType type : MHWeaponType.values()) {
 			registerInternal("item/" + type.getName());
 			String key = "item/" + type.getName() + "_gui";
-			registerModel(key, new ModelBuilder("item/generated").addTexture("layer0", "item/" + type.getTexture().toIdentifier()));
+			registerModel(key, new ModelBuilder("item/generated").addTexture("layer0", "item/dynamic/" + type.getTexture().toIdentifier()));
 		}
 
 		ModelBuilder oreItemModel = new ModelBuilder("monhun:block/ore_white");
@@ -65,7 +67,7 @@ public class MHModelManager {
 		registerModel("item/plant_block", plantItemModel);
 		registerInternal("item/plant_block_item");
 
-		registerInternal("item/spider_web_block");
+		registerInternal("block/spider_web_block");
 		registerParental("item/spider_web_block", "item/cobweb");
 
 		registerModel("item/royal_honey_block", new ModelBuilder("monhun:item/honey_block").addTexture("honey", "block/royal_honey_block"));
@@ -106,7 +108,7 @@ public class MHModelManager {
 	}
 
 	public static void registerTexture(String key, MHItemTexture texture) {
-		registerModel(key, new ModelBuilder("item/generated").addTexture("layer0", "item/" + texture.toIdentifier()));
+		registerModel(key, new ModelBuilder("item/generated").addTexture("layer0", "item/dynamic/" + texture.toIdentifier()));
 	}
 
 	public static void registerEgg(String key, MHMonsterClass monsterClass) {

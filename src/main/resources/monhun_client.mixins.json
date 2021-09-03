@@ -4,12 +4,12 @@
   "package": "eu.asangarin.monhun.client.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "MHModelLoader",
-    "MHItemRenderer",
-    "MHCrackParticle",
-    "MHWorldRenderer",
-    "MHInGameHud",
-    "MHHandledScreen"
+    "MHModelLoaderMixin",
+    "MHItemRendererMixin",
+    "MHCrackParticleMixin",
+    "MHWorldRendererMixin",
+    "MHInGameHudMixin",
+    "MHHandledScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

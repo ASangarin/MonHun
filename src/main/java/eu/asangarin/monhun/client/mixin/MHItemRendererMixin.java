@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemRenderer.class)
-public abstract class MHItemRenderer {
+public abstract class MHItemRendererMixin {
 	@Shadow
 	@Final
 	private ItemModels models;

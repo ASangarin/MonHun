@@ -2,16 +2,11 @@ package eu.asangarin.monhun.temp;
 
 import eu.asangarin.monhun.entity.MHMonsterEntity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
-import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.LookAtEntityGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.RevengeGoal;
-import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
-import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.MovementType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -32,38 +27,46 @@ public class TempEntityRathalos extends MHMonsterEntity {
 
 	public TempEntityRathalos(EntityType<? extends MHMonsterEntity> entityType, World world) {
 		super(entityType, world);
+		this.setNoGravity(true);
 	}
 
 	protected void initGoals() {
-		this.goalSelector.add(2, new MeleeAttackGoal(this, 2.0D, false));
+		/*this.goalSelector.add(2, new MeleeAttackGoal(this, 2.0D, false));
 		this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D));
 		this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.add(4, new LookAroundGoal(this));
 		this.targetSelector.add(1, new RevengeGoal(this));
 		this.targetSelector.add(2, new FollowTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.add(3, new FollowTargetGoal<>(this, PassiveEntity.class, true));
+		this.targetSelector.add(3, new FollowTargetGoal<>(this, PassiveEntity.class, true));*/
 	}
 
 	private <E extends IAnimatable> PlayState extraAnimationPredicate(AnimationEvent<E> event) {
-		event.getController().setAnimation(event.isMoving() ? WALKING_ANIMATION : IDLE_ANIMATION);
+		event.getController().setAnimation(IDLE_FLYING_ANIMATION);
 		return PlayState.CONTINUE;
 	}
 
 	private <E extends IAnimatable> PlayState actionAnimationPredicate(AnimationEvent<E> event) {
-		event.getController().setAnimation(IDLE_ANIMATION);
+		event.getController().setAnimation(IDLE_FLYING_ANIMATION);
 		return PlayState.CONTINUE;
 	}
 
 	private <E extends IAnimatable> PlayState idleAnimationPredicate(AnimationEvent<E> event) {
-		event.getController().setAnimation(IDLE_ANIMATION);
+		event.getController().setAnimation(IDLE_FLYING_ANIMATION);
 		return PlayState.CONTINUE;
 	}
 
-	/*@Override
+	@Override
+	public void tickMovement() {
+		//super.tickMovement();
+		Vec3d vec = new Vec3d(0, 0, 0.75d);
+		this.move(MovementType.SELF, vec);
+	}
+
+	@Override
 	public ActionResult interactMob(PlayerEntity player, Hand hand) {
-		this.setBodyYaw(bodyYaw + 3f);
+		this.setBodyYaw(bodyYaw + 5f);
 		return ActionResult.SUCCESS;
-	}*/
+	}
 
 	@Override
 	public void registerControllers(AnimationData data) {

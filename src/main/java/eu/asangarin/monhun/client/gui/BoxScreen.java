@@ -1,7 +1,8 @@
-package eu.asangarin.monhun.gui;
+package eu.asangarin.monhun.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import eu.asangarin.monhun.MonHun;
+import eu.asangarin.monhun.gui.ItemBoxScreenHandler;
 import eu.asangarin.monhun.util.interfaces.ICustomSlotHighlight;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
@@ -39,7 +40,7 @@ public class BoxScreen extends HandledScreen<ScreenHandler> implements ICustomSl
 				} else this.drawTexture(matrices, i - 23, j + 108, 176, 94, 23, 18);
 				RenderSystem.setShaderTexture(0, BOX_TEXTURE);
 			}
-			if(boxHandler.hasItems()) {
+			if (boxHandler.hasItems()) {
 				if (isMouseOn(i + this.backgroundWidth, j + 108, mouseX, mouseY)) {
 					this.drawTexture(matrices, i + this.backgroundWidth, j + 108, 199, 112, 23, 18);
 					this.renderTooltip(matrices, new TranslatableText("gui.monhun.next"), mouseX, mouseY);
@@ -80,10 +81,10 @@ public class BoxScreen extends HandledScreen<ScreenHandler> implements ICustomSl
 			int i = (this.width - this.backgroundWidth) / 2;
 			int j = (this.height - this.backgroundHeight) / 2;
 
-			if(client != null) {
+			if (client != null) {
 				int id = -1;
-				if(isMouseOn(i - 23, j + 108, mouseX, mouseY) && boxHandler.getPage() > 0) id = 0;
-				else if(isMouseOn(i + this.backgroundWidth, j + 108, mouseX, mouseY) && boxHandler.hasItems()) id = 1;
+				if (isMouseOn(i - 23, j + 108, mouseX, mouseY) && boxHandler.getPage() > 0) id = 0;
+				else if (isMouseOn(i + this.backgroundWidth, j + 108, mouseX, mouseY) && boxHandler.hasItems()) id = 1;
 
 				if (id != -1 && boxHandler.onButtonClick(this.client.player, id)) {
 					if (this.client.interactionManager != null) this.client.interactionManager.clickButton(boxHandler.syncId, id);

@@ -586,6 +586,8 @@
 
   "item.monhun.spawn_egg": "%s Spawn Egg",
 
+  "entity.monhun.npc.blacksmith": "Blacksmith",
+
   "entity.monhun.rathalos": "Rathalos",
 
   "monsterpart.rathalos.scale": "Rathalos Scale",

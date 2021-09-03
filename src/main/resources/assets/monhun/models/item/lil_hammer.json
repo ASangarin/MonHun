@@ -1,0 +1,65 @@
+{
+	"textures": {
+		"hammer": "monhun:item/lil_hammer"
+	},
+	"elements": [
+		{
+			"from": [7, 0, 7],
+			"to": [9, 16, 9],
+			"faces": {
+				"north": {"uv": [14, 0, 16, 16], "texture": "#hammer"},
+				"east": {"uv": [14, 0, 16, 16], "texture": "#hammer"},
+				"south": {"uv": [14, 0, 16, 16], "texture": "#hammer"},
+				"west": {"uv": [14, 0, 16, 16], "texture": "#hammer"},
+				"up": {"uv": [12, 12, 14, 14], "texture": "#hammer"},
+				"down": {"uv": [12, 14, 14, 16], "texture": "#hammer"}
+			}
+		},
+		{
+			"from": [6, 10, 4],
+			"to": [10, 14, 12],
+			"faces": {
+				"north": {"uv": [8, 0, 12, 4], "texture": "#hammer"},
+				"east": {"uv": [0, 4, 8, 8], "texture": "#hammer"},
+				"south": {"uv": [8, 4, 12, 8], "texture": "#hammer"},
+				"west": {"uv": [0, 0, 8, 4], "texture": "#hammer"},
+				"up": {"uv": [4, 8, 8, 16], "texture": "#hammer"},
+				"down": {"uv": [0, 8, 4, 16], "texture": "#hammer"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 2.25, 1.25]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 2.25, 1.25]
+		},
+		"firstperson_righthand": {
+			"translation": [0, 1.75, 0]
+		},
+		"firstperson_lefthand": {
+			"translation": [0, 1.75, 0]
+		},
+		"ground": {
+			"rotation": [60, 0, 0],
+			"translation": [0, 1.25, 0],
+			"scale": [0.7, 0.7, 0.7]
+		},
+		"gui": {
+			"rotation": [90, 45, -90],
+			"translation": [-0.25, -0.5, 0],
+			"scale": [1.1, 1.1, 1.1]
+		},
+		"head": {
+			"rotation": [0, 90, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [2, 2, 2]
+		},
+		"fixed": {
+			"rotation": [0, 90, 0],
+			"translation": [0, 0, -1.25],
+			"scale": [1.2, 1.2, 1.2]
+		}
+	}
+}

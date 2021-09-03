@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WorldRenderer.class)
-public class MHWorldRenderer {
+public class MHWorldRendererMixin {
 	@Inject(method = "drawBlockOutline", at = @At("HEAD"), cancellable = true)
 	private void drawBlockOutline(MatrixStack matrices, VertexConsumer vertexConsumer, Entity entity, double d, double e, double f, BlockPos blockPos, BlockState blockState, CallbackInfo ci) {
 		if(entity instanceof PlayerEntity player && player.getAbilities().creativeMode) return;

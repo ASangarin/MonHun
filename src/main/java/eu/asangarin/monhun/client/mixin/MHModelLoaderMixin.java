@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Map;
 
 @Mixin(ModelLoader.class)
-public abstract class MHModelLoader {
+public abstract class MHModelLoaderMixin {
 	private boolean hasLoaded = false;
 
 	@Shadow
